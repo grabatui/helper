@@ -1762,6 +1762,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: { data: Object },
@@ -1778,6 +1780,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             return result;
+        },
+        add: function add() {
+            var _this = this;
+
+            fetch('/add/' + this.id, { method: 'post' }).then(function (result) {
+                return _this.exists = result;
+            });
+        },
+        remove: function remove() {
+            var _this2 = this;
+
+            fetch('/add/' + this.id, { method: 'delete' }).then(function (result) {
+                return _this2.exists = !result;
+            });
         }
     }
 });
@@ -32309,9 +32325,15 @@ var render = function() {
           [_vm._v("Оригинал")]
         ),
         _vm._v(" "),
-        _c("button", { staticClass: "button button-primary" }, [
-          _vm._v("Добавить")
-        ])
+        !this.exists
+          ? _c(
+              "button",
+              { staticClass: "button button-primary", on: { click: _vm.add } },
+              [_vm._v("Добавить")]
+            )
+          : _c("button", { staticClass: "button", on: { click: _vm.remove } }, [
+              _vm._v("Убрать")
+            ])
       ])
     ])
   ])

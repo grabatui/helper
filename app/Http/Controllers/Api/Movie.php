@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Entities\Movie as MovieEntity;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Siqwell\Kinopoisk\Client;
+use Siqwell\Kinopoisk\Models\Film;
 
-class Movie
+class Movie extends Controller
 {
     public function search(Request $request)
     {
@@ -23,9 +26,30 @@ class Movie
         $result = $parser->getSearchApi()->searchFilm($query);
 
         if ($result instanceof Collection) {
-            $result = $result->slice(0, $limit)->toArray();
+            $result = $result->slice(0, $limit);
         }
 
-        return new JsonResponse((!empty($result)) ? $result : []);
+        if ($result->count() > 0) {
+            $this->bindSavedMovies($result);
+        }
+
+        return new JsonResponse(($result->isNotEmpty()) ? $result->toArray() : []);
+    }
+
+    /**
+     * @param Collection|Film[] $movies
+     */
+    private function bindSavedMovies(Collection $movies)
+    {
+        $exists = (new MovieEntity)
+            ->whereIn('kp_id', $movies->pluck('id')->toArray())
+            ->get(['id', 'kp_id'])
+            ->pluck('id', 'kp_id');
+
+        $movies->each(function (Film $film) use ($exists) {
+            $kpId = $film->getAttribute('id');
+
+            $film->setAttribute('exists', ($exists->has($kpId)) ? $exists->get($kpId) : null);
+        });
     }
 }

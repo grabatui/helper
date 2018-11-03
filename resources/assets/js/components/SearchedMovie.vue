@@ -15,7 +15,9 @@
 
             <div>
                 <a :href="this.url" class="button" target="_blank">Оригинал</a>
-                <button class="button button-primary">Добавить</button>
+
+                <button class="button button-primary" v-if="!this.exists" @click="add">Добавить</button>
+                <button class="button" v-else @click="remove">Убрать</button>
             </div>
         </div>
     </div>
@@ -36,6 +38,14 @@
                 }
 
                 return result;
+            },
+            add() {
+                fetch('/add/' + this.id, {method: 'post'})
+                    .then((result) => this.exists = result);
+            },
+            remove() {
+                fetch('/add/' + this.id, {method: 'delete'})
+                    .then((result) => this.exists = !result);
             },
         },
     }
