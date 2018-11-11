@@ -1,7 +1,40 @@
 let mix = require('laravel-mix');
 
-mix.js('resources/assets/js/app.js', 'public/js').minify('public/js/app.js').version();
-mix.sass('resources/assets/sass/app.scss', 'public/css').minify('public/css/app.css').version();
-mix.sass('resources/assets/sass/skeleton.scss', 'public/css').minify('public/css/skeleton.css').version();
+const config = {
+    sass: {
+        from: 'resources/assets/sass/',
+        to: 'public/css/',
+        items: [
+            'app',
+            'skeleton',
+        ],
+    },
+    js: {
+        from: 'resources/assets/js/',
+        to: 'public/js/',
+        items: [
+            'app',
+        ],
+    },
+    files: {
+        from: 'resources/assets/',
+        to: 'public/',
+        items: [
+            'img',
+        ],
+    },
+};
 
-mix.copyDirectory('resources/assets/img', 'public/img');
+config.sass.items.forEach((file) => mix
+    .sass(config.sass.from + file + '.scss', config.sass.to)
+    .minify(config.sass.to + file + '.css')
+    .version()
+);
+
+config.js.items.forEach((file) => mix
+    .js(config.js.from + file + '.js', config.js.to)
+    .copy(config.js.to + file + '.js', config.js.to + file + '.min.js')
+    .version()
+);
+
+config.files.items.forEach((file) => mix.copyDirectory(config.files.from + file, config.files.to + file))

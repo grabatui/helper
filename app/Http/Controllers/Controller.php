@@ -15,14 +15,4 @@ class Controller extends BaseController
     {
         return view('index');
     }
-
-    public function add(int $id)
-    {
-
-    }
-
-    public function delete(int $id)
-    {
-
-    }
 }

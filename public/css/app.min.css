@@ -1,40 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);.search__wrapper {
-  position: relative;
-}
-
-.search__button {
-  font-size: 36px;
-}
-
-.search__list {
-  position: absolute;
-  top: 50px;
-  left: 0;
-  width: 100%;
-}
-
-.search__list-item {
-  list-style: none;
-  margin: 0;
-  border: 1px solid;
-  border-bottom: none;
-  padding: 5px 10px;
-}
-
-.search__list-item:last-child {
-  border-bottom: 1px solid;
-}
-
-.search__list-item__poster {
-  line-height: 10px;
-}
-
-.search__list-item__poster img {
-  width: 50%;
-}
-
-.search__list-item__data {
-  margin-left: 0;
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);.menu__add {
+  font-size: 3rem;
 }
 
 .container {

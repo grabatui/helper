@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use Carbon\Carbon;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -16,8 +17,8 @@ use Illuminate\Database\Eloquent\Builder;
  * @property string $name
  * @property string|null $image
  * @property int|null $year
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @method static Builder|Movie whereCreatedAt($value)
  * @method static Builder|Movie whereId($value)
  * @method static Builder|Movie whereImage($value)

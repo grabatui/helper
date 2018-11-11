@@ -1,5 +1,7 @@
 <?php
 
+use GuzzleHttp\RequestOptions;
+
 return [
 
     /*
@@ -36,7 +38,13 @@ return [
     ],
 
     'kinopoisk' => [
-        'client' => [],
+        'cache' => [],
+        'client' => [
+            RequestOptions::TIMEOUT => 30,
+            RequestOptions::ALLOW_REDIRECTS => true,
+            RequestOptions::PROXY => null,
+            RequestOptions::VERIFY => false,
+        ],
     ],
 
 ];

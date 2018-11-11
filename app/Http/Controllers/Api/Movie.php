@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Entities\Movie as MovieEntity;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\JsonResponse;
+use App\Http\Resources\Movie as MovieCollection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Siqwell\Kinopoisk\Client;
@@ -18,7 +18,7 @@ class Movie extends Controller
         $limit = $request->get('limit', 10);
 
         if (empty($query)) {
-            return new JsonResponse([]);
+            return MovieCollection::make();
         }
 
         /** @var Client $parser */
@@ -33,7 +33,7 @@ class Movie extends Controller
             $this->bindSavedMovies($result);
         }
 
-        return new JsonResponse(($result->isNotEmpty()) ? $result->toArray() : []);
+        return MovieCollection::make($result);
     }
 
     /**

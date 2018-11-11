@@ -1,6 +1,3 @@
 <?php
 
-Route::get('/', 'Controller@index');
-
-Route::post('/movies/add/{id}', 'Controller@add');
-Route::delete('/movies/delete/{id}', 'Controller@delete');
+Route::get('/{any}', 'Controller@index')->where('any', '.*');
