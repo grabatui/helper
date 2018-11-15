@@ -12,6 +12,13 @@ use Siqwell\Kinopoisk\Models\Film;
 
 class Movie extends Controller
 {
+    public function queue()
+    {
+        $items = MovieEntity::whereWatched(false)->get();
+
+        return MovieCollection::make($items);
+    }
+
     public function search(Request $request)
     {
         $query = $request->get('q');
@@ -34,6 +41,11 @@ class Movie extends Controller
         }
 
         return MovieCollection::make($result);
+    }
+
+    public function add(Request $request)
+    {
+        // TODO: Поменять в ссылке на картинку sm_film на film_big
     }
 
     /**

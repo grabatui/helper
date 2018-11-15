@@ -30,7 +30,7 @@
     <title>Grabatui's helper</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,300,600" rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" href="{{ mix('/css/skeleton.min.css') }}" />
     <link rel="stylesheet" href="{{ mix('/css/app.min.css') }}" />

@@ -2,6 +2,27 @@
   font-size: 3rem;
 }
 
+.movie {
+  max-height: 200px;
+}
+
+.movie--image {
+  max-height: 200px;
+}
+
+.movie--title h5,
+.movie--title a {
+  display: inline-block;
+}
+
+.movie--title a {
+  max-width: 100%;
+}
+
+.movie--title a img {
+  width: 20px;
+}
+
 .container {
   padding: 1rem 0;
 }

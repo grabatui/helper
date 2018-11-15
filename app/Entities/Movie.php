@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @property int|null $year
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property-read mixed $kp_link
  * @method static Builder|Movie whereCreatedAt($value)
  * @method static Builder|Movie whereId($value)
  * @method static Builder|Movie whereImage($value)
@@ -28,8 +29,20 @@ use Illuminate\Database\Eloquent\Builder;
  * @method static Builder|Movie whereUpdatedAt($value)
  * @method static Builder|Movie whereWatched($value)
  * @method static Builder|Movie whereYear($value)
+ * @method static Movie newModelQuery()
+ * @method static Movie newQuery()
+ * @method static Movie query()
  */
 class Movie extends Eloquent
 {
+    const KP_LINK_TEMPLATE = 'https://www.kinopoisk.ru/film/%d/';
 
+    protected $appends = [
+        'kp_link',
+    ];
+
+    public function getKpLinkAttribute()
+    {
+        return ($this->kp_id) ? sprintf(self::KP_LINK_TEMPLATE, $this->kp_id) : '';
+    }
 }

@@ -1722,14 +1722,158 @@ exports.default = {};
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _class; //
+//
 //
 //
 //
 //
 
-exports.default = {};
+var _vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _vueClassComponent = __webpack_require__("./node_modules/vue-class-component/dist/vue-class-component.common.js");
+
+var _vueClassComponent2 = _interopRequireDefault(_vueClassComponent);
+
+var _axios = __webpack_require__("./node_modules/axios/index.js");
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _Movie = __webpack_require__("./resources/assets/js/components/Queue/Movie.vue");
+
+var _Movie2 = _interopRequireDefault(_Movie);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Main = (_dec = (0, _vueClassComponent2.default)({
+    components: { Movie: _Movie2.default }
+}), _dec(_class = function (_Vue) {
+    _inherits(Main, _Vue);
+
+    function Main() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, Main);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Main.__proto__ || Object.getPrototypeOf(Main)).call.apply(_ref, [this].concat(args))), _this), _this.items = {}, _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    _createClass(Main, [{
+        key: 'mounted',
+        value: function mounted() {
+            var _this2 = this;
+
+            _axios2.default.get('/api/movie/queue').then(function (response) {
+                return _this2.items = response.data.data;
+            });
+        }
+    }]);
+
+    return Main;
+}(_vue2.default)) || _class);
+exports.default = Main;
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],\"es2015\"],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-decorators-legacy\",\"transform-class-properties\"]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/Queue/Movie.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _class; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var _vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _vueClassComponent = __webpack_require__("./node_modules/vue-class-component/dist/vue-class-component.common.js");
+
+var _vueClassComponent2 = _interopRequireDefault(_vueClassComponent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Main = (_dec = (0, _vueClassComponent2.default)({
+    props: {
+        item: Object
+    }
+}), _dec(_class = function (_Vue) {
+    _inherits(Main, _Vue);
+
+    function Main() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, Main);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Main.__proto__ || Object.getPrototypeOf(Main)).call.apply(_ref, [this].concat(args))), _this), _this.items = {}, _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    _createClass(Main, [{
+        key: 'title',
+        get: function get() {
+            return this.item.name + ' (' + this.item.year + ')';
+        }
+    }]);
+
+    return Main;
+}(_vue2.default)) || _class);
+exports.default = Main;
 
 /***/ }),
 
@@ -32580,7 +32724,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("p", [_vm._v("hi queue")])
+  return _c(
+    "div",
+    _vm._l(_vm.items, function(item) {
+      return _c("movie", { key: item.id, attrs: { item: item } })
+    })
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -32610,6 +32759,44 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-5cacde39", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-648e372b\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Queue/Movie.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row movie" }, [
+    _c("div", { staticClass: "two columns" }, [
+      _c("img", {
+        staticClass: "movie--image u-max-full-width",
+        attrs: { src: _vm.item.image, alt: _vm.item.name }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "ten columns" }, [
+      _c("div", { staticClass: "movie--title" }, [
+        _c("h5", [_vm._v(_vm._s(_vm.title))]),
+        _vm._v(" "),
+        _c("a", { attrs: { href: _vm.item.kp_link, target: "_blank" } }, [
+          _c("img", { attrs: { src: "/img/kp.png", alt: _vm.item.name } })
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-648e372b", module.exports)
   }
 }
 
@@ -46549,6 +46736,54 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-40929e2c", Component.options)
   } else {
     hotAPI.reload("data-v-40929e2c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Queue/Movie.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],\"es2015\"],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-decorators-legacy\",\"transform-class-properties\"]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/Queue/Movie.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-648e372b\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Queue/Movie.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Queue/Movie.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-648e372b", Component.options)
+  } else {
+    hotAPI.reload("data-v-648e372b", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
