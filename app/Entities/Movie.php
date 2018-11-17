@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Builder;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $watched_at
+ * @property int|null $rating
+ * @property string $opinion
  * @property-read mixed $kp_link
  * @property-read mixed $rt_link
  * @method static Builder|Movie whereId($value)
@@ -29,11 +31,13 @@ use Illuminate\Database\Eloquent\Builder;
  * @method static Builder|Movie whereName($value)
  * @method static Builder|Movie whereOriginalName($value)
  * @method static Builder|Movie whereSort($value)
+ * @method static Builder|Movie whereYear($value)
  * @method static Builder|Movie whereCreatedAt($value)
  * @method static Builder|Movie whereUpdatedAt($value)
- * @method static Builder|Movie whereWatchedAt($value)
  * @method static Builder|Movie whereWatched($value)
- * @method static Builder|Movie whereYear($value)
+ * @method static Builder|Movie whereWatchedAt($value)
+ * @method static Builder|Movie whereOpinion($value)
+ * @method static Builder|Movie whereRating($value)
  * @method static Movie newModelQuery()
  * @method static Movie newQuery()
  * @method static Movie query()

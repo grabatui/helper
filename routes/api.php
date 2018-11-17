@@ -1,12 +1,22 @@
 <?php
 
-Route::group([
-    'as' => 'api.',
-    'namespace' => 'Api',
-], function () {
-    Route::get('/movie/queue', 'Movie@queue')->name('queue');
-    Route::get('/movie/search', 'Movie@search')->name('search');
+Route::group(
+    [
+        'as' => 'api.',
+        'namespace' => 'Api',
+    ],
+    function () {
+        Route::group(
+            [
+                'prefix' => 'movie',
+            ],
+            function () {
+                Route::get('/queue', 'Movie@queue')->name('queue');
+                Route::get('/watched', 'Movie@watched')->name('watched');
+                Route::get('/search', 'Movie@search')->name('search');
 
-    Route::post('/movie/{movie}/watch', 'Movie@watch');
-    Route::post('/movie/{movie}/opinion', 'Movie@opinion');
-});
+                Route::post('/{movie}/watch', 'Movie@watch');
+            }
+        );
+    }
+);

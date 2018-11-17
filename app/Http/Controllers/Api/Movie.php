@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Entities\Movie as MovieEntity;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Movie as MovieCollection;
+use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Siqwell\Kinopoisk\Client;
@@ -14,12 +16,12 @@ class Movie extends Controller
 {
     public function queue()
     {
-        return MovieCollection::make(MovieEntity::whereWatched(false)->get());
+        return MovieCollection::make(MovieEntity::whereWatched(false)->orderBy('sort')->get());
     }
 
     public function watched()
     {
-        return MovieCollection::make(MovieEntity::whereWatched(true)->get());
+        return MovieCollection::make(MovieEntity::whereWatched(true)->orderByDesc('watched_at')->get());
     }
 
     public function search(Request $request)
@@ -47,14 +49,20 @@ class Movie extends Controller
         return MovieCollection::make($result);
     }
 
-    public function watch(MovieEntity $movie)
+    public function watch(MovieEntity $movie, Request $request)
     {
+        $movie->watched = true;
+        $movie->watched_at = Carbon::now();
 
-    }
+        if ($request->has('rating')) {
+            $movie->rating = $request->post('rating');
+        }
 
-    public function opinion(MovieEntity $movie)
-    {
+        if ($request->has('opinion')) {
+            $movie->opinion = $request->post('opinion');
+        }
 
+        return new JsonResponse(($movie->save()) ? 'success' : 'error');
     }
 
     public function add(Request $request)
