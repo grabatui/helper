@@ -1826,6 +1826,10 @@ var _dec, _class; //
 //
 //
 //
+//
+//
+//
+//
 
 var _vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 
@@ -32783,9 +32787,21 @@ var render = function() {
       _c("div", { staticClass: "movie--title" }, [
         _c("h5", [_vm._v(_vm._s(_vm.title))]),
         _vm._v(" "),
-        _c("a", { attrs: { href: _vm.item.kp_link, target: "_blank" } }, [
-          _c("img", { attrs: { src: "/img/kp.png", alt: _vm.item.name } })
-        ])
+        _vm.item.kp_link
+          ? _c("a", { attrs: { href: _vm.item.kp_link, target: "_blank" } }, [
+              _c("img", {
+                attrs: { src: "/img/kp.png", alt: "Найти на КиноПоиске" }
+              })
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.item.rt_link
+          ? _c("a", { attrs: { href: _vm.item.rt_link, target: "_blank" } }, [
+              _c("img", {
+                attrs: { src: "/img/rt.png", alt: "Найти на RuTracker'е" }
+              })
+            ])
+          : _vm._e()
       ])
     ])
   ])

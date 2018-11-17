@@ -1,0 +1,21 @@
+.movie {
+	max-height: 200px;
+
+	&--image {
+		max-height: 200px;
+	}
+
+	&--title {
+		h5, a {
+			display: inline-block;
+		}
+
+		a {
+			max-width: 100%;
+
+			img {
+				width: 20px;
+			}
+		}
+	}
+}

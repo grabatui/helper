@@ -35,14 +35,18 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Movie extends Eloquent
 {
-    const KP_LINK_TEMPLATE = 'https://www.kinopoisk.ru/film/%d/';
-
     protected $appends = [
         'kp_link',
+        'rt_link',
     ];
 
     public function getKpLinkAttribute()
     {
-        return ($this->kp_id) ? sprintf(self::KP_LINK_TEMPLATE, $this->kp_id) : '';
+        return ($this->kp_id) ? route('external.kp.detail', $this->kp_id) : '';
+    }
+
+    public function getRtLinkAttribute()
+    {
+        return route('external.rt.search', sprintf('%s+%s', $this->name, $this->year));
     }
 }
