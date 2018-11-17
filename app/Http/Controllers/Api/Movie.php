@@ -14,9 +14,12 @@ class Movie extends Controller
 {
     public function queue()
     {
-        $items = MovieEntity::whereWatched(false)->get();
+        return MovieCollection::make(MovieEntity::whereWatched(false)->get());
+    }
 
-        return MovieCollection::make($items);
+    public function watched()
+    {
+        return MovieCollection::make(MovieEntity::whereWatched(true)->get());
     }
 
     public function search(Request $request)
@@ -40,7 +43,18 @@ class Movie extends Controller
             $this->bindSavedMovies($result);
         }
 
+        // TODO: Превратить в коллекцию фильмов, чтобы всё вело себя одинаково
         return MovieCollection::make($result);
+    }
+
+    public function watch(MovieEntity $movie)
+    {
+
+    }
+
+    public function opinion(MovieEntity $movie)
+    {
+
     }
 
     public function add(Request $request)
@@ -55,8 +69,8 @@ class Movie extends Controller
     {
         $exists = (new MovieEntity)
             ->whereIn('kp_id', $movies->pluck('id')->toArray())
-            ->get(['id', 'kp_id'])
-            ->pluck('id', 'kp_id');
+            ->get()
+            ->keyBy('kp_id');
 
         $movies->each(function (Film $film) use ($exists) {
             $kpId = $film->getAttribute('id');

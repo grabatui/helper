@@ -4,23 +4,93 @@
 
 .movie {
   max-height: 200px;
+  text-align: center;
 }
 
-.movie--image {
+.movie__image img {
   max-height: 200px;
 }
 
-.movie--title h5,
-.movie--title a {
+.movie__content:after {
+  content: "";
+  border-top: 1px solid;
+  width: 100%;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.movie__title {
+  display: block;
+}
+
+.movie__title h5,
+.movie__title a {
   display: inline-block;
 }
 
-.movie--title a {
+.movie__title h5 {
+  margin-bottom: 0;
+}
+
+.movie__title a {
   max-width: 100%;
 }
 
-.movie--title a img {
+.movie__title a img {
   width: 20px;
+}
+
+.movie__subtitle {
+  display: block;
+  color: lightgray;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.movie__buttons-watch {
+  display: inline-block;
+}
+
+.movie__opinion {
+  display: block;
+}
+
+.movie__opinion-rating {
+  display: block;
+  margin-right: 10px;
+}
+
+.movie__opinion-text {
+  display: block;
+  min-width: 60%;
+  width: 100%;
+  margin: 10px 0;
+}
+
+@media (min-width: 1000px) {
+  .movie__opinion-rating {
+    display: inline-block;
+  }
+
+  .movie__opinion-text {
+    display: inline-block;
+    width: auto;
+    margin: 0;
+  }
+
+  .movie__opinion-button {
+    display: inline-block;
+  }
+}
+
+@media (min-width: 550px) {
+  .movie {
+    text-align: left;
+  }
+
+  .movie__content:after {
+    content: none;
+  }
 }
 
 .container {

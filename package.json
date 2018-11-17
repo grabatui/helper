@@ -26,5 +26,8 @@
         "vue-class-component": "^6.3.2",
         "vue-property-decorator": "^7.0.0",
         "vue-router": "^3.0.1"
+    },
+    "dependencies": {
+        "vue-star-rating": "^1.6.1"
     }
 }
