@@ -14,7 +14,7 @@ class AddAdditionalColumnsToMovieTable extends Migration
     {
         Schema::table('movies', function (Blueprint $table) {
             $table->timestamp('watched_at')->after('updated_at')->nullable();
-            $table->string('original_name')->after('name')->default('');
+            $table->string('original_name')->after('name')->nullable()->default('');
         });
     }
 
