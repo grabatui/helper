@@ -1781,17 +1781,13 @@ var _vueClassComponent = __webpack_require__("./node_modules/vue-class-component
 
 var _vueClassComponent2 = _interopRequireDefault(_vueClassComponent);
 
-var _Search = __webpack_require__("./resources/assets/js/components/New/Search.vue");
+var _Search = __webpack_require__("./resources/assets/js/modules/Search.vue");
 
 var _Search2 = _interopRequireDefault(_Search);
 
 var _Movie = __webpack_require__("./resources/assets/js/components/Queue/Movie.vue");
 
 var _Movie2 = _interopRequireDefault(_Movie);
-
-var _vuex = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
-
-var _vuex2 = _interopRequireDefault(_vuex);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1817,129 +1813,12 @@ var New = (_dec = (0, _vueClassComponent2.default)({
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = New.__proto__ || Object.getPrototypeOf(New)).call.apply(_ref, [this].concat(args))), _this), _this.itemsStore = new _vuex2.default.Store({
-            state: {
-                items: {}
-            },
-            mutations: {
-                set: function set(state, items) {
-                    state.items = items;
-                }
-            }
-        }), _temp), _possibleConstructorReturn(_this, _ret);
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = New.__proto__ || Object.getPrototypeOf(New)).call.apply(_ref, [this].concat(args))), _this), _this.items = {}, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     return New;
 }(_vue2.default)) || _class);
 exports.default = New;
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],\"es2015\"],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-decorators-legacy\",\"transform-class-properties\"]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/New/Search.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _dec, _class; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var _vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
-
-var _vue2 = _interopRequireDefault(_vue);
-
-var _vueClassComponent = __webpack_require__("./node_modules/vue-class-component/dist/vue-class-component.common.js");
-
-var _vueClassComponent2 = _interopRequireDefault(_vueClassComponent);
-
-var _ClipLoader = __webpack_require__("./node_modules/vue-spinner/src/ClipLoader.vue");
-
-var _ClipLoader2 = _interopRequireDefault(_ClipLoader);
-
-var _axios = __webpack_require__("./node_modules/axios/index.js");
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Search = (_dec = (0, _vueClassComponent2.default)({
-    components: { ClipLoader: _ClipLoader2.default }
-}), _dec(_class = function (_Vue) {
-    _inherits(Search, _Vue);
-
-    function Search() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
-        _classCallCheck(this, Search);
-
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
-
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Search.__proto__ || Object.getPrototypeOf(Search)).call.apply(_ref, [this].concat(args))), _this), _this.inProcess = false, _this.query = '', _temp), _possibleConstructorReturn(_this, _ret);
-    }
-
-    _createClass(Search, [{
-        key: 'search',
-        value: function search() {
-            var _this2 = this;
-
-            this.$parent.itemsStore.commit('set', {});
-
-            this.inProcess = true;
-
-            _axios2.default.get('/api/movie/search?query=' + this.query).then(function (result) {
-                _this2.$parent.itemsStore.commit('set', result.data.data);
-
-                _this2.inProcess = false;
-
-                _this2.$refs.query.focus();
-            }).catch(function (error) {
-                return console.error(error);
-            });
-        }
-    }]);
-
-    return Search;
-}(_vue2.default)) || _class);
-exports.default = Search;
 
 /***/ }),
 
@@ -1962,6 +1841,8 @@ var _dec, _class; //
 //
 //
 //
+//
+//
 
 var _vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 
@@ -1979,6 +1860,10 @@ var _Movie = __webpack_require__("./resources/assets/js/components/Queue/Movie.v
 
 var _Movie2 = _interopRequireDefault(_Movie);
 
+var _Search = __webpack_require__("./resources/assets/js/modules/Search.vue");
+
+var _Search2 = _interopRequireDefault(_Search);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1988,7 +1873,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Main = (_dec = (0, _vueClassComponent2.default)({
-    components: { Movie: _Movie2.default }
+    components: { Movie: _Movie2.default, Search: _Search2.default }
 }), _dec(_class = function (_Vue) {
     _inherits(Main, _Vue);
 
@@ -2003,7 +1888,7 @@ var Main = (_dec = (0, _vueClassComponent2.default)({
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Main.__proto__ || Object.getPrototypeOf(Main)).call.apply(_ref, [this].concat(args))), _this), _this.items = {}, _temp), _possibleConstructorReturn(_this, _ret);
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Main.__proto__ || Object.getPrototypeOf(Main)).call.apply(_ref, [this].concat(args))), _this), _this.endpoint = '/api/movie/queue', _this.items = {}, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(Main, [{
@@ -2011,7 +1896,7 @@ var Main = (_dec = (0, _vueClassComponent2.default)({
         value: function mounted() {
             var _this2 = this;
 
-            _axios2.default.get('/api/movie/queue').then(function (response) {
+            _axios2.default.get(this.endpoint).then(function (response) {
                 return _this2.items = response.data.data;
             });
         }
@@ -2156,35 +2041,67 @@ var Main = (_dec = (0, _vueClassComponent2.default)({
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Main.__proto__ || Object.getPrototypeOf(Main)).call.apply(_ref, [this].concat(args))), _this), _this.shown = true, _this.showOpinionForm = false, _this.watchedData = {}, _temp), _possibleConstructorReturn(_this, _ret);
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Main.__proto__ || Object.getPrototypeOf(Main)).call.apply(_ref, [this].concat(args))), _this), _this.data = {}, _this.shown = true, _this.showOpinionForm = false, _this.watchedData = {}, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(Main, [{
         key: 'add',
-        value: function add() {}
+        value: function add() {
+            var _this2 = this;
+
+            if (this.data.exists) {
+                return;
+            }
+
+            _axios2.default.post('/api/movie/add', this.data).then(function (result) {
+                if (!result.data) {
+                    console.error('Something wrong, my lord..');
+
+                    return;
+                }
+
+                _this2.data.id = result.data;
+
+                _this2.reload();
+            });
+        }
     }, {
         key: 'watched',
         value: function watched() {
-            var _this2 = this;
+            var _this3 = this;
 
             this.showOpinionForm = false;
 
-            _axios2.default.post('/api/movie/' + this.item.id + '/watch', this.watchedData).then(function (result) {
+            _axios2.default.post('/api/movie/' + this.data.id + '/watch', this.watchedData).then(function (result) {
                 if (result.data !== 'success') {
                     console.error('Something wrong, my lord..');
 
                     return;
                 }
 
-                _this2.shown = false;
+                _this3.shown = false;
             }).catch(function (error) {
                 return console.error(error);
             });
         }
     }, {
+        key: 'reload',
+        value: function reload() {
+            var _this4 = this;
+
+            _axios2.default.get('/api/movie/' + this.data.id).then(function (result) {
+                return _this4.data = result.data.data;
+            });
+        }
+    }, {
+        key: 'mounted',
+        value: function mounted() {
+            this.data = this.item;
+        }
+    }, {
         key: 'title',
         get: function get() {
-            return this.item.name + ' (' + this.item.year + ')';
+            return this.data.name + ' (' + this.data.year + ')';
         }
     }]);
 
@@ -2213,6 +2130,8 @@ var _dec, _class; //
 //
 //
 //
+//
+//
 
 var _vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 
@@ -2230,6 +2149,10 @@ var _Movie = __webpack_require__("./resources/assets/js/components/Queue/Movie.v
 
 var _Movie2 = _interopRequireDefault(_Movie);
 
+var _Search = __webpack_require__("./resources/assets/js/modules/Search.vue");
+
+var _Search2 = _interopRequireDefault(_Search);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2239,7 +2162,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Main = (_dec = (0, _vueClassComponent2.default)({
-    components: { Movie: _Movie2.default }
+    components: { Movie: _Movie2.default, Search: _Search2.default }
 }), _dec(_class = function (_Vue) {
     _inherits(Main, _Vue);
 
@@ -2254,7 +2177,7 @@ var Main = (_dec = (0, _vueClassComponent2.default)({
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Main.__proto__ || Object.getPrototypeOf(Main)).call.apply(_ref, [this].concat(args))), _this), _this.items = {}, _temp), _possibleConstructorReturn(_this, _ret);
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Main.__proto__ || Object.getPrototypeOf(Main)).call.apply(_ref, [this].concat(args))), _this), _this.endpoint = '/api/movie/watched', _this.items = {}, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(Main, [{
@@ -2262,7 +2185,7 @@ var Main = (_dec = (0, _vueClassComponent2.default)({
         value: function mounted() {
             var _this2 = this;
 
-            _axios2.default.get('/api/movie/watched').then(function (response) {
+            _axios2.default.get(this.endpoint).then(function (response) {
                 return _this2.items = response.data.data;
             });
         }
@@ -2271,6 +2194,115 @@ var Main = (_dec = (0, _vueClassComponent2.default)({
     return Main;
 }(_vue2.default)) || _class);
 exports.default = Main;
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],\"es2015\"],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-decorators-legacy\",\"transform-class-properties\"]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/modules/Search.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _class; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var _vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _vueClassComponent = __webpack_require__("./node_modules/vue-class-component/dist/vue-class-component.common.js");
+
+var _vueClassComponent2 = _interopRequireDefault(_vueClassComponent);
+
+var _ClipLoader = __webpack_require__("./node_modules/vue-spinner/src/ClipLoader.vue");
+
+var _ClipLoader2 = _interopRequireDefault(_ClipLoader);
+
+var _axios = __webpack_require__("./node_modules/axios/index.js");
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Search = (_dec = (0, _vueClassComponent2.default)({
+    components: { ClipLoader: _ClipLoader2.default },
+    props: { endpoint: String }
+}), _dec(_class = function (_Vue) {
+    _inherits(Search, _Vue);
+
+    function Search() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, Search);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Search.__proto__ || Object.getPrototypeOf(Search)).call.apply(_ref, [this].concat(args))), _this), _this.inProcess = false, _this.query = '', _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    _createClass(Search, [{
+        key: 'search',
+        value: function search() {
+            var _this2 = this;
+
+            this.$emit('loaded', {});
+
+            this.inProcess = true;
+
+            _axios2.default.get(this.endpoint + '?query=' + this.query).then(function (result) {
+                _this2.$emit('loaded', result.data.data);
+
+                _this2.inProcess = false;
+
+                _this2.$refs.query.focus();
+            }).catch(function (error) {
+                return console.error(error);
+            });
+        }
+    }]);
+
+    return Search;
+}(_vue2.default)) || _class);
+exports.default = Search;
 
 /***/ }),
 
@@ -33259,92 +33291,6 @@ if (false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-38355f0e\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/New/Search.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "search" },
-    [
-      _c(
-        "form",
-        {
-          staticClass: "row",
-          on: {
-            submit: function($event) {
-              $event.preventDefault()
-              return _vm.search($event)
-            }
-          }
-        },
-        [
-          _c("div", { staticClass: "ten columns" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.query,
-                  expression: "query"
-                }
-              ],
-              ref: "query",
-              staticClass: "search__input u-full-width",
-              attrs: {
-                type: "text",
-                placeholder: "Начните вводить название фильма",
-                disabled: _vm.inProcess,
-                autofocus: ""
-              },
-              domProps: { value: _vm.query },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.query = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "two columns" }, [
-            _c(
-              "button",
-              {
-                staticClass: "search__button button u-full-width",
-                attrs: { type: "submit", disabled: _vm.inProcess }
-              },
-              [_vm._v("Искать")]
-            )
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("clip-loader", {
-        staticClass: "search__loader",
-        attrs: { loading: _vm.inProcess, size: "30px" }
-      })
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-38355f0e", module.exports)
-  }
-}
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-40929e2c\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Queue.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33354,9 +33300,21 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(_vm.items, function(item) {
-      return _c("movie", { key: item.id, attrs: { item: item } })
-    })
+    [
+      _c("search", {
+        attrs: { endpoint: _vm.endpoint },
+        on: {
+          loaded: function($event) {
+            _vm.items = $event
+          }
+        }
+      }),
+      _vm._v(" "),
+      _vm._l(_vm.items, function(item) {
+        return _c("movie", { key: item.id, attrs: { item: item } })
+      })
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -33381,9 +33339,16 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("search"),
+      _c("search", {
+        attrs: { endpoint: "/api/movie/search" },
+        on: {
+          loaded: function($event) {
+            _vm.items = $event
+          }
+        }
+      }),
       _vm._v(" "),
-      _vm._l(_vm.itemsStore.state.items, function(item) {
+      _vm._l(_vm.items, function(item) {
         return _c("movie", {
           key: item.id,
           attrs: { item: item, transition: "fade-up" }
@@ -33418,7 +33383,7 @@ var render = function() {
           _c("div", { staticClass: "two columns movie__image" }, [
             _c("img", {
               staticClass: "u-max-full-width",
-              attrs: { src: _vm.item.image, alt: _vm.item.name }
+              attrs: { src: _vm.data.image, alt: _vm.data.name }
             })
           ]),
           _vm._v(" "),
@@ -33426,10 +33391,10 @@ var render = function() {
             _c("div", { staticClass: "movie__title" }, [
               _c("h5", [_vm._v(_vm._s(_vm.title))]),
               _vm._v(" "),
-              _vm.item.kp_link
+              _vm.data.kp_link
                 ? _c(
                     "a",
-                    { attrs: { href: _vm.item.kp_link, target: "_blank" } },
+                    { attrs: { href: _vm.data.kp_link, target: "_blank" } },
                     [
                       _c("img", {
                         attrs: {
@@ -33441,10 +33406,10 @@ var render = function() {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              _vm.item.rt_link
+              _vm.data.rt_link
                 ? _c(
                     "a",
-                    { attrs: { href: _vm.item.rt_link, target: "_blank" } },
+                    { attrs: { href: _vm.data.rt_link, target: "_blank" } },
                     [
                       _c("img", {
                         attrs: {
@@ -33457,31 +33422,31 @@ var render = function() {
                 : _vm._e()
             ]),
             _vm._v(" "),
-            _vm.item.original_name
+            _vm.data.original_name
               ? _c("p", { staticClass: "movie__subtitle" }, [
-                  _vm._v(_vm._s(_vm.item.original_name))
+                  _vm._v(_vm._s(_vm.data.original_name))
                 ])
               : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "movie__body" }, [
               _c("ul", [
-                _vm.item.created_at
+                _vm.data.created_at
                   ? _c("li", [
                       _c("strong", [_vm._v("Добавлено:")]),
                       _vm._v(
                         " " +
-                          _vm._s(_vm.item.created_at) +
+                          _vm._s(_vm.data.created_at) +
                           "\n                    "
                       )
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.item.watched_at
+                _vm.data.watched_at
                   ? _c("li", [
                       _c("strong", [_vm._v("Просмотрено:")]),
                       _vm._v(
                         " " +
-                          _vm._s(_vm.item.watched_at) +
+                          _vm._s(_vm.data.watched_at) +
                           "\n                    "
                       )
                     ])
@@ -33489,9 +33454,9 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            !_vm.item.watched
+            !_vm.data.watched
               ? _c("div", { staticClass: "movie__buttons" }, [
-                  !_vm.item.exists
+                  !_vm.data.exists
                     ? _c(
                         "button",
                         {
@@ -33503,7 +33468,7 @@ var render = function() {
                       )
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.item.exists && !_vm.item.watched && !_vm.showOpinionForm
+                  _vm.data.exists && !_vm.data.watched && !_vm.showOpinionForm
                     ? _c(
                         "button",
                         {
@@ -33590,16 +33555,16 @@ var render = function() {
                           "show-rating": false,
                           "star-size": 20,
                           "read-only": true,
-                          rating: _vm.item.rating || 0
+                          rating: _vm.data.rating || 0
                         }
                       })
                     ],
                     1
                   ),
                   _vm._v(" "),
-                  _vm.item.opinion
+                  _vm.data.opinion
                     ? _c("p", { staticClass: "movie__opinion-text" }, [
-                        _vm._v(_vm._s(_vm.item.opinion))
+                        _vm._v(_vm._s(_vm.data.opinion))
                       ])
                     : _vm._e()
                 ])
@@ -33620,6 +33585,92 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-8caa5ffc\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/modules/Search.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "search" },
+    [
+      _c(
+        "form",
+        {
+          staticClass: "row",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.search($event)
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "ten columns" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.query,
+                  expression: "query"
+                }
+              ],
+              ref: "query",
+              staticClass: "search__input u-full-width",
+              attrs: {
+                type: "text",
+                placeholder: "Начните вводить название фильма",
+                disabled: _vm.inProcess,
+                autofocus: ""
+              },
+              domProps: { value: _vm.query },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.query = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "two columns" }, [
+            _c(
+              "button",
+              {
+                staticClass: "search__button button u-full-width",
+                attrs: { type: "submit", disabled: _vm.inProcess }
+              },
+              [_vm._v("Искать")]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("clip-loader", {
+        staticClass: "search__loader",
+        attrs: { loading: _vm.inProcess, size: "30px" }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-8caa5ffc", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-dbeb2272\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Watched.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33629,9 +33680,21 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(_vm.items, function(item) {
-      return _c("movie", { key: item.id, attrs: { item: item } })
-    })
+    [
+      _c("search", {
+        attrs: { endpoint: _vm.endpoint },
+        on: {
+          loaded: function($event) {
+            _vm.items = $event
+          }
+        }
+      }),
+      _vm._v(" "),
+      _vm._l(_vm.items, function(item) {
+        return _c("movie", { key: item.id, attrs: { item: item } })
+      })
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -48882,54 +48945,6 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ "./resources/assets/js/components/New/Search.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
-/* script */
-var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],\"es2015\"],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-decorators-legacy\",\"transform-class-properties\"]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/New/Search.vue")
-/* template */
-var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-38355f0e\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/New/Search.vue")
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/New/Search.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-38355f0e", Component.options)
-  } else {
-    hotAPI.reload("data-v-38355f0e", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
 /***/ "./resources/assets/js/components/Queue.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -49067,6 +49082,54 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-dbeb2272", Component.options)
   } else {
     hotAPI.reload("data-v-dbeb2272", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/modules/Search.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],\"es2015\"],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-decorators-legacy\",\"transform-class-properties\"]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/modules/Search.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-8caa5ffc\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/modules/Search.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/Search.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8caa5ffc", Component.options)
+  } else {
+    hotAPI.reload("data-v-8caa5ffc", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

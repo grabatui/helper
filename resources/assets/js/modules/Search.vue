@@ -29,21 +29,22 @@
     import axios from 'axios';
 
     @Component({
-        components: {ClipLoader}
+        components: {ClipLoader},
+        props: {endpoint: String}
     })
     export default class Search extends Vue {
         inProcess = false;
         query = '';
 
         search() {
-            this.$parent.itemsStore.commit('set', {});
+            this.$emit('loaded', {});
 
             this.inProcess = true;
 
             axios
-                .get('/api/movie/search?query=' + this.query)
+                .get(this.endpoint + '?query=' + this.query)
                 .then((result) => {
-                    this.$parent.itemsStore.commit('set', result.data.data);
+                    this.$emit('loaded', result.data.data);
 
                     this.inProcess = false;
 

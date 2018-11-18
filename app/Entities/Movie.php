@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use Siqwell\Kinopoisk\Models\Film;
 
 /**
- * App\Entities\Movie
+ * App\Entities\MovieCollection
  *
  * @mixin Eloquent
  * @property int $id
@@ -46,6 +46,8 @@ use Siqwell\Kinopoisk\Models\Film;
  */
 class Movie extends Eloquent
 {
+    const SORT_STEP = 5;
+
     const DATETIME_FORMAT = 'd.m.Y H:i:s';
 
     const EMPTY_IMAGE = 'https://st.kp.yandex.net/images/movies/poster_none.png';
@@ -60,6 +62,8 @@ class Movie extends Eloquent
         'kp_link',
         'rt_link',
     ];
+
+    protected $guarded = [];
 
     public static function createFromKP(Film $film): Movie
     {

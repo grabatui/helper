@@ -1,32 +1,22 @@
 <template>
     <div>
-        <search />
+        <search endpoint="/api/movie/search" @loaded="items = $event" />
 
-        <movie v-for="item in itemsStore.state.items" :key="item.id" :item="item" :transition="'fade-up'" />
+        <movie v-for="item in items" :key="item.id" :item="item" :transition="'fade-up'" />
     </div>
 </template>
 
 <script>
     import Vue from 'vue';
     import Component from 'vue-class-component';
-    import Search from './New/Search';
+    import Search from '../modules/Search';
     import Movie from './Queue/Movie';
-    import Vuex from 'vuex';
 
     @Component({
         components: {Search, Movie},
     })
     export default class New extends Vue {
-        itemsStore = new Vuex.Store({
-            state: {
-                items: {},
-            },
-            mutations: {
-                set(state, items) {
-                    state.items = items;
-                }
-            },
-        });
+        items = {};
     }
 </script>
 

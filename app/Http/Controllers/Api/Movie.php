@@ -4,24 +4,42 @@ namespace App\Http\Controllers\Api;
 
 use App\Entities\Movie as MovieEntity;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Movie as MovieCollection;
+use App\Http\Resources\Movie as MovieResource;
+use App\Http\Resources\MovieCollection;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Siqwell\Kinopoisk\Client;
 use Siqwell\Kinopoisk\Models\Film;
 
 class Movie extends Controller
 {
-    public function queue()
+    public function queue(Request $request)
     {
-        return MovieCollection::make(MovieEntity::whereWatched(false)->orderBy('sort')->get());
+        $query = $request->get('query');
+
+        $movies = MovieEntity::whereWatched(false)->orderBy('sort');
+
+        if (Str::length($query) > 0) {
+            $movies->where('name', 'like', '%' . $query . '%');
+        }
+
+        return MovieCollection::make($movies->get());
     }
 
-    public function watched()
+    public function watched(Request $request)
     {
-        return MovieCollection::make(MovieEntity::whereWatched(true)->orderByDesc('watched_at')->get());
+        $query = $request->get('query');
+
+        $movies = MovieEntity::whereWatched(true)->orderByDesc('watched_at');
+
+        if (Str::length($query) > 0) {
+            $movies->where('name', 'like', '%' . $query . '%');
+        }
+
+        return MovieCollection::make($movies->get());
     }
 
     public function search(Request $request)
@@ -48,6 +66,11 @@ class Movie extends Controller
         return MovieCollection::make($result);
     }
 
+    public function detail(MovieEntity $movie)
+    {
+        return MovieResource::make($movie);
+    }
+
     public function watch(MovieEntity $movie, Request $request)
     {
         $movie->watched = true;
@@ -66,7 +89,14 @@ class Movie extends Controller
 
     public function add(Request $request)
     {
+        $data = array_only($request->toArray(), ['name', 'original_name', 'image', 'kp_id', 'year']);
 
+        $movie = new MovieEntity($data);
+
+        $movie->watched = false;
+        $movie->sort = MovieEntity::orderByDesc('sort')->first(['sort'])->sort + MovieEntity::SORT_STEP;
+
+        return new JsonResponse(($movie->save()) ? $movie->id : null);
     }
 
     /**

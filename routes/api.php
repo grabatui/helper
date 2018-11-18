@@ -15,7 +15,10 @@ Route::group(
                 Route::get('/watched', 'Movie@watched')->name('watched');
                 Route::get('/search', 'Movie@search')->name('search');
 
+                Route::get('/{movie}', 'Movie@detail')->name('detail');
+
                 Route::post('/{movie}/watch', 'Movie@watch');
+                Route::post('/add', 'Movie@add');
             }
         );
     }

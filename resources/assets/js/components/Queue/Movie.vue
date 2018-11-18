@@ -2,47 +2,47 @@
     <transition :name="transition || 'fade'">
         <div class="row movie" v-if="shown">
             <div class="two columns movie__image">
-                <img :src="item.image" :alt="item.name" class="u-max-full-width" />
+                <img :src="data.image" :alt="data.name" class="u-max-full-width" />
             </div>
 
             <div class="ten columns movie__content">
                 <div class="movie__title">
                     <h5>{{ title }}</h5>
 
-                    <a v-if="item.kp_link" :href="item.kp_link" target="_blank">
+                    <a v-if="data.kp_link" :href="data.kp_link" target="_blank">
                         <img src="/img/kp.png" alt="Найти на КиноПоиске" />
                     </a>
 
-                    <a v-if="item.rt_link" :href="item.rt_link" target="_blank">
+                    <a v-if="data.rt_link" :href="data.rt_link" target="_blank">
                         <img src="/img/rt.png" alt="Найти на RuTracker'е" />
                     </a>
                 </div>
 
-                <p class="movie__subtitle" v-if="item.original_name">{{ item.original_name }}</p>
+                <p class="movie__subtitle" v-if="data.original_name">{{ data.original_name }}</p>
 
                 <div class="movie__body">
                     <ul>
-                        <li v-if="item.created_at">
-                            <strong>Добавлено:</strong>&nbsp;{{ item.created_at }}
+                        <li v-if="data.created_at">
+                            <strong>Добавлено:</strong>&nbsp;{{ data.created_at }}
                         </li>
 
-                        <li v-if="item.watched_at">
-                            <strong>Просмотрено:</strong>&nbsp;{{ item.watched_at }}
+                        <li v-if="data.watched_at">
+                            <strong>Просмотрено:</strong>&nbsp;{{ data.watched_at }}
                         </li>
                     </ul>
                 </div>
 
-                <div class="movie__buttons" v-if="!item.watched">
+                <div class="movie__buttons" v-if="!data.watched">
                     <button
                         @click="add"
                         class="button button-primary movie__buttons-watch"
-                        v-if="!item.exists"
+                        v-if="!data.exists"
                     >Добавить</button>
 
                     <button
                         @click="showOpinionForm = true"
                         class="button button-primary movie__buttons-watch"
-                        v-if="item.exists && !item.watched && !showOpinionForm"
+                        v-if="data.exists && !data.watched && !showOpinionForm"
                     >Просмотрено</button>
 
                     <div v-if="showOpinionForm" class="movie__opinion">
@@ -63,10 +63,10 @@
 
                 <div v-else class="movie__opinion">
                     <div class="movie__opinion-rating">
-                        <star-rating :show-rating="false" :star-size="20" :read-only="true" :rating="item.rating || 0" />
+                        <star-rating :show-rating="false" :star-size="20" :read-only="true" :rating="data.rating || 0" />
                     </div>
 
-                    <p v-if="item.opinion" class="movie__opinion-text">{{ item.opinion }}</p>
+                    <p v-if="data.opinion" class="movie__opinion-text">{{ data.opinion }}</p>
                 </div>
             </div>
         </div>
@@ -87,23 +87,40 @@
         components: {StarRating},
     })
     export default class Main extends Vue {
+        data = {};
         shown = true;
         showOpinionForm = false;
         watchedData = {};
 
         get title() {
-            return this.item.name + ' (' + this.item.year + ')';
+            return this.data.name + ' (' + this.data.year + ')';
         }
 
         add() {
+            if (this.data.exists) {
+                return;
+            }
 
+            axios
+                .post('/api/movie/add', this.data)
+                .then((result) => {
+                    if (!result.data) {
+                        console.error('Something wrong, my lord..');
+
+                        return;
+                    }
+
+                    this.data.id = result.data;
+
+                    this.reload();
+                })
         }
 
         watched() {
             this.showOpinionForm = false;
 
             axios
-                .post('/api/movie/' + this.item.id + '/watch', this.watchedData)
+                .post('/api/movie/' + this.data.id + '/watch', this.watchedData)
                 .then((result) => {
                     if (result.data !== 'success') {
                         console.error('Something wrong, my lord..');
@@ -114,6 +131,16 @@
                     this.shown = false;
                 })
                 .catch((error) => console.error(error))
+        }
+
+        reload() {
+            axios
+                .get('/api/movie/' + this.data.id)
+                .then((result) => this.data = result.data.data);
+        }
+
+        mounted() {
+            this.data = this.item;
         }
     }
 </script>
