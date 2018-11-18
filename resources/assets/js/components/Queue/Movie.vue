@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade">
+    <transition :name="transition || 'fade'">
         <div class="row movie" v-if="shown">
             <div class="two columns movie__image">
                 <img :src="item.image" :alt="item.name" class="u-max-full-width" />
@@ -34,9 +34,15 @@
 
                 <div class="movie__buttons" v-if="!item.watched">
                     <button
+                        @click="add"
+                        class="button button-primary movie__buttons-watch"
+                        v-if="!item.exists"
+                    >Добавить</button>
+
+                    <button
                         @click="showOpinionForm = true"
                         class="button button-primary movie__buttons-watch"
-                        v-if="!item.watched && !showOpinionForm"
+                        v-if="item.exists && !item.watched && !showOpinionForm"
                     >Просмотрено</button>
 
                     <div v-if="showOpinionForm" class="movie__opinion">
@@ -74,7 +80,10 @@
     import axios from 'axios';
 
     @Component({
-        props: {item: Object},
+        props: {
+            item: Object,
+            transition: String,
+        },
         components: {StarRating},
     })
     export default class Main extends Vue {
@@ -84,6 +93,10 @@
 
         get title() {
             return this.item.name + ' (' + this.item.year + ')';
+        }
+
+        add() {
+
         }
 
         watched() {

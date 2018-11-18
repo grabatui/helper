@@ -5,6 +5,8 @@ namespace App\Entities;
 use Carbon\Carbon;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
+use Siqwell\Kinopoisk\Models\Film;
 
 /**
  * App\Entities\Movie
@@ -46,6 +48,8 @@ class Movie extends Eloquent
 {
     const DATETIME_FORMAT = 'd.m.Y H:i:s';
 
+    const EMPTY_IMAGE = 'https://st.kp.yandex.net/images/movies/poster_none.png';
+
     protected $dates = [
         'created_at',
         'updated_at',
@@ -56,6 +60,40 @@ class Movie extends Eloquent
         'kp_link',
         'rt_link',
     ];
+
+    public static function createFromKP(Film $film): Movie
+    {
+        $entity = new static();
+
+        $entity->kp_id = $film->getAttribute('id');
+        $entity->watched = false;
+        $entity->name = $film->getAttribute('title');
+        $entity->original_name = $film->getAttribute('original');
+        $entity->year = $film->getAttribute('year');
+        $entity->image = $film->getAttribute('poster');
+
+        return $entity;
+    }
+
+    /**
+     * Заменяем ссылку на большое изображение
+     *
+     * @param string $value
+     */
+    public function setImageAttribute($value)
+    {
+        if (Str::length($value) <= 0) {
+            $this->attributes['image'] = self::EMPTY_IMAGE;
+
+            return;
+        }
+
+        if (Str::contains($value, '/film/')) {
+            $value = Str::replaceFirst('/film/', '/film_big/', $value);
+        }
+
+        $this->attributes['image'] = $value;
+    }
 
     public function getKpLinkAttribute()
     {
@@ -72,7 +110,10 @@ class Movie extends Eloquent
         return array_merge(
             parent::toArray(),
             [
-                'created_at' => $this->created_at->format(self::DATETIME_FORMAT),
+                'exists' => $this->exists,
+                'created_at' => ($this->created_at instanceof Carbon) ?
+                    $this->created_at->format(self::DATETIME_FORMAT) :
+                    '',
                 'updated_at' => ($this->updated_at instanceof Carbon) ?
                     $this->updated_at->format(self::DATETIME_FORMAT) :
                     '',

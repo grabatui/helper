@@ -26,7 +26,7 @@ class Movie extends Controller
 
     public function search(Request $request)
     {
-        $query = $request->get('q');
+        $query = $request->get('query');
         $limit = $request->get('limit', 10);
 
         if (empty($query)) {
@@ -42,10 +42,9 @@ class Movie extends Controller
         }
 
         if ($result->count() > 0) {
-            $this->bindSavedMovies($result);
+            $result = $this->convertSearchToMovieCollection($result);
         }
 
-        // TODO: Превратить в коллекцию фильмов, чтобы всё вело себя одинаково
         return MovieCollection::make($result);
     }
 
@@ -67,23 +66,31 @@ class Movie extends Controller
 
     public function add(Request $request)
     {
-        // TODO: Поменять в ссылке на картинку sm_film на film_big
+
     }
 
     /**
      * @param Collection|Film[] $movies
+     * @return Collection
      */
-    private function bindSavedMovies(Collection $movies)
+    private function convertSearchToMovieCollection(Collection $movies)
     {
-        $exists = (new MovieEntity)
-            ->whereIn('kp_id', $movies->pluck('id')->toArray())
-            ->get()
-            ->keyBy('kp_id');
+        $ids = $movies->reduce(function ($cherry, Film $film) {
+            $cherry[] = $film->getAttribute('id');
 
-        $movies->each(function (Film $film) use ($exists) {
+            return $cherry;
+        });
+
+        $exists = (new MovieEntity)->whereIn('kp_id', $ids)->get()->keyBy('kp_id');
+
+        return $movies->transform(function (Film $film) use ($exists) {
             $kpId = $film->getAttribute('id');
 
-            $film->setAttribute('exists', ($exists->has($kpId)) ? $exists->get($kpId) : null);
+            if ($exists->has($kpId)) {
+                return $exists->get($kpId);
+            }
+
+            return MovieEntity::createFromKP($film);
         });
     }
 }
