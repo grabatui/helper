@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Movie as MovieResource;
 use App\Http\Resources\MovieCollection;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -16,30 +17,22 @@ use Siqwell\Kinopoisk\Models\Film;
 
 class Movie extends Controller
 {
+    const BY_PAGE = 10;
+
     public function queue(Request $request)
     {
-        $query = $request->get('query');
-
-        $movies = MovieEntity::whereWatched(false)->orderBy('sort');
-
-        if (Str::length($query) > 0) {
-            $movies->where('name', 'like', '%' . $query . '%');
-        }
-
-        return MovieCollection::make($movies->get());
+        return $this->getExistsCollection($request, function (Builder $builder) {
+            /** @var MovieEntity $builder */
+            $builder->whereWatched(false);
+        });
     }
 
     public function watched(Request $request)
     {
-        $query = $request->get('query');
-
-        $movies = MovieEntity::whereWatched(true)->orderByDesc('watched_at');
-
-        if (Str::length($query) > 0) {
-            $movies->where('name', 'like', '%' . $query . '%');
-        }
-
-        return MovieCollection::make($movies->get());
+        return $this->getExistsCollection($request, function (Builder $builder) {
+            /** @var MovieEntity $builder */
+            $builder->whereWatched(true);
+        });
     }
 
     public function search(Request $request)
@@ -122,5 +115,20 @@ class Movie extends Controller
 
             return MovieEntity::createFromKP($film);
         });
+    }
+
+    private function getExistsCollection(Request $request, callable $filter)
+    {
+        $query = $request->get('query');
+
+        $movies = MovieEntity::orderByDesc('watched_at');
+
+        call_user_func($filter, $movies);
+
+        if (Str::length($query) > 0) {
+            $movies->where('name', 'like', '%' . $query . '%');
+        }
+
+        return MovieCollection::make($movies->paginate(self::BY_PAGE));
     }
 }

@@ -4,8 +4,12 @@
 	margin-bottom: 10px;
 
 	&__image {
+		min-height: 100%;
+		text-align: center;
+
 		img {
 			max-height: 200px;
+			min-width: 100%;
 		}
 	}
 

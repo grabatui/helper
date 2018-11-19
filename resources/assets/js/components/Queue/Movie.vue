@@ -2,7 +2,7 @@
     <transition :name="transition || 'fade'">
         <div class="row movie" v-if="shown">
             <div class="two columns movie__image">
-                <img :src="data.image" :alt="data.name" class="u-max-full-width" />
+                <img :src="data.image" :alt="data.name" :title="data.name" class="u-max-full-width" />
             </div>
 
             <div class="ten columns movie__content">
@@ -93,7 +93,13 @@
         watchedData = {};
 
         get title() {
-            return this.data.name + ' (' + this.data.year + ')';
+            let result = this.data.name;
+
+            if (this.data.year) {
+                result += ' (' + this.data.year + ')';
+            }
+
+            return result;
         }
 
         add() {

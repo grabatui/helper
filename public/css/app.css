@@ -8,8 +8,14 @@
   margin-bottom: 10px;
 }
 
+.movie__image {
+  min-height: 100%;
+  text-align: center;
+}
+
 .movie__image img {
   max-height: 200px;
+  min-width: 100%;
 }
 
 .movie__content:after {

@@ -50,7 +50,7 @@ class Movie extends Eloquent
 
     const DATETIME_FORMAT = 'd.m.Y H:i:s';
 
-    const EMPTY_IMAGE = 'https://st.kp.yandex.net/images/movies/poster_none.png';
+    const EMPTY_IMAGE = 'https://st.kp.yandex.net/images/no-poster.gif';
 
     protected $dates = [
         'created_at',

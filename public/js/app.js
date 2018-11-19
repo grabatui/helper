@@ -1720,6 +1720,17 @@ var _class; //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var _vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 
@@ -1833,36 +1844,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _class;
 
-var _dec, _class; //
-//
-//
-//
-//
-//
-//
-//
+var _ExistsList2 = __webpack_require__("./resources/assets/js/mixins/ExistsList.vue");
 
-var _vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
-
-var _vue2 = _interopRequireDefault(_vue);
+var _ExistsList3 = _interopRequireDefault(_ExistsList2);
 
 var _vueClassComponent = __webpack_require__("./node_modules/vue-class-component/dist/vue-class-component.common.js");
 
 var _vueClassComponent2 = _interopRequireDefault(_vueClassComponent);
-
-var _axios = __webpack_require__("./node_modules/axios/index.js");
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _Movie = __webpack_require__("./resources/assets/js/components/Queue/Movie.vue");
-
-var _Movie2 = _interopRequireDefault(_Movie);
-
-var _Search = __webpack_require__("./resources/assets/js/modules/Search.vue");
-
-var _Search2 = _interopRequireDefault(_Search);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1872,10 +1862,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Main = (_dec = (0, _vueClassComponent2.default)({
-    components: { Movie: _Movie2.default, Search: _Search2.default }
-}), _dec(_class = function (_Vue) {
-    _inherits(Main, _Vue);
+var Main = (0, _vueClassComponent2.default)(_class = function (_ExistsList) {
+    _inherits(Main, _ExistsList);
 
     function Main() {
         var _ref;
@@ -1888,22 +1876,12 @@ var Main = (_dec = (0, _vueClassComponent2.default)({
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Main.__proto__ || Object.getPrototypeOf(Main)).call.apply(_ref, [this].concat(args))), _this), _this.endpoint = '/api/movie/queue', _this.items = {}, _temp), _possibleConstructorReturn(_this, _ret);
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Main.__proto__ || Object.getPrototypeOf(Main)).call.apply(_ref, [this].concat(args))), _this), _this.endpoint = '/api/movie/queue', _temp), _possibleConstructorReturn(_this, _ret);
     }
 
-    _createClass(Main, [{
-        key: 'mounted',
-        value: function mounted() {
-            var _this2 = this;
-
-            _axios2.default.get(this.endpoint).then(function (response) {
-                return _this2.items = response.data.data;
-            });
-        }
-    }]);
-
     return Main;
-}(_vue2.default)) || _class);
+}(_ExistsList3.default)) || _class;
+
 exports.default = Main;
 
 /***/ }),
@@ -2101,7 +2079,13 @@ var Main = (_dec = (0, _vueClassComponent2.default)({
     }, {
         key: 'title',
         get: function get() {
-            return this.data.name + ' (' + this.data.year + ')';
+            var result = this.data.name;
+
+            if (this.data.year) {
+                result += ' (' + this.data.year + ')';
+            }
+
+            return result;
         }
     }]);
 
@@ -2122,9 +2106,64 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
+var _class;
+
+var _ExistsList2 = __webpack_require__("./resources/assets/js/mixins/ExistsList.vue");
+
+var _ExistsList3 = _interopRequireDefault(_ExistsList2);
+
+var _vueClassComponent = __webpack_require__("./node_modules/vue-class-component/dist/vue-class-component.common.js");
+
+var _vueClassComponent2 = _interopRequireDefault(_vueClassComponent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Main = (0, _vueClassComponent2.default)(_class = function (_ExistsList) {
+    _inherits(Main, _ExistsList);
+
+    function Main() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, Main);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Main.__proto__ || Object.getPrototypeOf(Main)).call.apply(_ref, [this].concat(args))), _this), _this.endpoint = '/api/movie/watched', _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    return Main;
+}(_ExistsList3.default)) || _class;
+
+exports.default = Main;
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],\"es2015\"],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-decorators-legacy\",\"transform-class-properties\"]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/mixins/ExistsList.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _dec, _class; //
+//
+//
 //
 //
 //
@@ -2153,6 +2192,14 @@ var _Search = __webpack_require__("./resources/assets/js/modules/Search.vue");
 
 var _Search2 = _interopRequireDefault(_Search);
 
+var _ClipLoader = __webpack_require__("./node_modules/vue-spinner/src/ClipLoader.vue");
+
+var _ClipLoader2 = _interopRequireDefault(_ClipLoader);
+
+var _concat = __webpack_require__("./node_modules/lodash/concat.js");
+
+var _concat2 = _interopRequireDefault(_concat);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2161,39 +2208,76 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Main = (_dec = (0, _vueClassComponent2.default)({
-    components: { Movie: _Movie2.default, Search: _Search2.default }
+var ExistsList = (_dec = (0, _vueClassComponent2.default)({
+    components: { Movie: _Movie2.default, Search: _Search2.default, ClipLoader: _ClipLoader2.default }
 }), _dec(_class = function (_Vue) {
-    _inherits(Main, _Vue);
+    _inherits(ExistsList, _Vue);
 
-    function Main() {
+    function ExistsList() {
         var _ref;
 
         var _temp, _this, _ret;
 
-        _classCallCheck(this, Main);
+        _classCallCheck(this, ExistsList);
 
         for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Main.__proto__ || Object.getPrototypeOf(Main)).call.apply(_ref, [this].concat(args))), _this), _this.endpoint = '/api/movie/watched', _this.items = {}, _temp), _possibleConstructorReturn(_this, _ret);
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = ExistsList.__proto__ || Object.getPrototypeOf(ExistsList)).call.apply(_ref, [this].concat(args))), _this), _this.scrollModifier = 200, _this.searching = false, _this.nextPage = null, _this.items = [], _temp), _possibleConstructorReturn(_this, _ret);
     }
 
-    _createClass(Main, [{
+    _createClass(ExistsList, [{
         key: 'mounted',
         value: function mounted() {
+            this.items = [];
+            this.nextPage = this.endpoint;
+
+            this.getItems();
+        }
+    }, {
+        key: 'created',
+        value: function created() {
+            window.addEventListener('scroll', this.onScroll);
+        }
+    }, {
+        key: 'destroyed',
+        value: function destroyed() {
+            window.removeEventListener('scroll', this.onScroll);
+        }
+    }, {
+        key: 'onScroll',
+        value: function onScroll() {
+            if (!this.searching && window.innerHeight + window.scrollY + this.scrollModifier >= document.body.offsetHeight) {
+                this.getItems();
+            }
+        }
+    }, {
+        key: 'getItems',
+        value: function getItems() {
             var _this2 = this;
 
-            _axios2.default.get(this.endpoint).then(function (response) {
-                return _this2.items = response.data.data;
+            if (this.nextPage) {
+                this.searching = true;
+            } else {
+                return;
+            }
+
+            _axios2.default.get(this.nextPage).then(function (response) {
+                _this2.items = !_this2.items || _this2.items.length <= 0 ? response.data.data : (0, _concat2.default)(_this2.items, response.data.data);
+
+                if (response.data.hasOwnProperty('links')) {
+                    _this2.nextPage = response.data.links.next;
+                }
+
+                _this2.searching = false;
             });
         }
     }]);
 
-    return Main;
+    return ExistsList;
 }(_vue2.default)) || _class);
-exports.default = Main;
+exports.default = ExistsList;
 
 /***/ }),
 
@@ -15214,6 +15298,477 @@ if ( !noGlobal ) {
 
 return jQuery;
 } );
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_Symbol.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__("./node_modules/lodash/_root.js");
+
+/** Built-in value references. */
+var Symbol = root.Symbol;
+
+module.exports = Symbol;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_arrayPush.js":
+/***/ (function(module, exports) {
+
+/**
+ * Appends the elements of `values` to `array`.
+ *
+ * @private
+ * @param {Array} array The array to modify.
+ * @param {Array} values The values to append.
+ * @returns {Array} Returns `array`.
+ */
+function arrayPush(array, values) {
+  var index = -1,
+      length = values.length,
+      offset = array.length;
+
+  while (++index < length) {
+    array[offset + index] = values[index];
+  }
+  return array;
+}
+
+module.exports = arrayPush;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseFlatten.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayPush = __webpack_require__("./node_modules/lodash/_arrayPush.js"),
+    isFlattenable = __webpack_require__("./node_modules/lodash/_isFlattenable.js");
+
+/**
+ * The base implementation of `_.flatten` with support for restricting flattening.
+ *
+ * @private
+ * @param {Array} array The array to flatten.
+ * @param {number} depth The maximum recursion depth.
+ * @param {boolean} [predicate=isFlattenable] The function invoked per iteration.
+ * @param {boolean} [isStrict] Restrict to values that pass `predicate` checks.
+ * @param {Array} [result=[]] The initial result value.
+ * @returns {Array} Returns the new flattened array.
+ */
+function baseFlatten(array, depth, predicate, isStrict, result) {
+  var index = -1,
+      length = array.length;
+
+  predicate || (predicate = isFlattenable);
+  result || (result = []);
+
+  while (++index < length) {
+    var value = array[index];
+    if (depth > 0 && predicate(value)) {
+      if (depth > 1) {
+        // Recursively flatten arrays (susceptible to call stack limits).
+        baseFlatten(value, depth - 1, predicate, isStrict, result);
+      } else {
+        arrayPush(result, value);
+      }
+    } else if (!isStrict) {
+      result[result.length] = value;
+    }
+  }
+  return result;
+}
+
+module.exports = baseFlatten;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseGetTag.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__("./node_modules/lodash/_Symbol.js"),
+    getRawTag = __webpack_require__("./node_modules/lodash/_getRawTag.js"),
+    objectToString = __webpack_require__("./node_modules/lodash/_objectToString.js");
+
+/** `Object#toString` result references. */
+var nullTag = '[object Null]',
+    undefinedTag = '[object Undefined]';
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+function baseGetTag(value) {
+  if (value == null) {
+    return value === undefined ? undefinedTag : nullTag;
+  }
+  return (symToStringTag && symToStringTag in Object(value))
+    ? getRawTag(value)
+    : objectToString(value);
+}
+
+module.exports = baseGetTag;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_baseIsArguments.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__("./node_modules/lodash/_baseGetTag.js"),
+    isObjectLike = __webpack_require__("./node_modules/lodash/isObjectLike.js");
+
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]';
+
+/**
+ * The base implementation of `_.isArguments`.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ */
+function baseIsArguments(value) {
+  return isObjectLike(value) && baseGetTag(value) == argsTag;
+}
+
+module.exports = baseIsArguments;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_copyArray.js":
+/***/ (function(module, exports) {
+
+/**
+ * Copies the values of `source` to `array`.
+ *
+ * @private
+ * @param {Array} source The array to copy values from.
+ * @param {Array} [array=[]] The array to copy values to.
+ * @returns {Array} Returns `array`.
+ */
+function copyArray(source, array) {
+  var index = -1,
+      length = source.length;
+
+  array || (array = Array(length));
+  while (++index < length) {
+    array[index] = source[index];
+  }
+  return array;
+}
+
+module.exports = copyArray;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_freeGlobal.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+module.exports = freeGlobal;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_getRawTag.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__("./node_modules/lodash/_Symbol.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the raw `toStringTag`.
+ */
+function getRawTag(value) {
+  var isOwn = hasOwnProperty.call(value, symToStringTag),
+      tag = value[symToStringTag];
+
+  try {
+    value[symToStringTag] = undefined;
+    var unmasked = true;
+  } catch (e) {}
+
+  var result = nativeObjectToString.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag] = tag;
+    } else {
+      delete value[symToStringTag];
+    }
+  }
+  return result;
+}
+
+module.exports = getRawTag;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_isFlattenable.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__("./node_modules/lodash/_Symbol.js"),
+    isArguments = __webpack_require__("./node_modules/lodash/isArguments.js"),
+    isArray = __webpack_require__("./node_modules/lodash/isArray.js");
+
+/** Built-in value references. */
+var spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined;
+
+/**
+ * Checks if `value` is a flattenable `arguments` object or array.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
+ */
+function isFlattenable(value) {
+  return isArray(value) || isArguments(value) ||
+    !!(spreadableSymbol && value && value[spreadableSymbol]);
+}
+
+module.exports = isFlattenable;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_objectToString.js":
+/***/ (function(module, exports) {
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/**
+ * Converts `value` to a string using `Object.prototype.toString`.
+ *
+ * @private
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ */
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+
+module.exports = objectToString;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/_root.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var freeGlobal = __webpack_require__("./node_modules/lodash/_freeGlobal.js");
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+module.exports = root;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/concat.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayPush = __webpack_require__("./node_modules/lodash/_arrayPush.js"),
+    baseFlatten = __webpack_require__("./node_modules/lodash/_baseFlatten.js"),
+    copyArray = __webpack_require__("./node_modules/lodash/_copyArray.js"),
+    isArray = __webpack_require__("./node_modules/lodash/isArray.js");
+
+/**
+ * Creates a new array concatenating `array` with any additional arrays
+ * and/or values.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Array
+ * @param {Array} array The array to concatenate.
+ * @param {...*} [values] The values to concatenate.
+ * @returns {Array} Returns the new concatenated array.
+ * @example
+ *
+ * var array = [1];
+ * var other = _.concat(array, 2, [3], [[4]]);
+ *
+ * console.log(other);
+ * // => [1, 2, 3, [4]]
+ *
+ * console.log(array);
+ * // => [1]
+ */
+function concat() {
+  var length = arguments.length;
+  if (!length) {
+    return [];
+  }
+  var args = Array(length - 1),
+      array = arguments[0],
+      index = length;
+
+  while (index--) {
+    args[index - 1] = arguments[index];
+  }
+  return arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 1));
+}
+
+module.exports = concat;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isArguments.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseIsArguments = __webpack_require__("./node_modules/lodash/_baseIsArguments.js"),
+    isObjectLike = __webpack_require__("./node_modules/lodash/isObjectLike.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/** Built-in value references. */
+var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+
+/**
+ * Checks if `value` is likely an `arguments` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ *  else `false`.
+ * @example
+ *
+ * _.isArguments(function() { return arguments; }());
+ * // => true
+ *
+ * _.isArguments([1, 2, 3]);
+ * // => false
+ */
+var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsArguments : function(value) {
+  return isObjectLike(value) && hasOwnProperty.call(value, 'callee') &&
+    !propertyIsEnumerable.call(value, 'callee');
+};
+
+module.exports = isArguments;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isArray.js":
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is classified as an `Array` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+ * @example
+ *
+ * _.isArray([1, 2, 3]);
+ * // => true
+ *
+ * _.isArray(document.body.children);
+ * // => false
+ *
+ * _.isArray('abc');
+ * // => false
+ *
+ * _.isArray(_.noop);
+ * // => false
+ */
+var isArray = Array.isArray;
+
+module.exports = isArray;
+
+
+/***/ }),
+
+/***/ "./node_modules/lodash/isObjectLike.js":
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return value != null && typeof value == 'object';
+}
+
+module.exports = isObjectLike;
 
 
 /***/ }),
@@ -33197,6 +33752,7 @@ var render = function() {
               "router-link",
               {
                 staticClass: "button u-full-width",
+                class: { "button-primary": _vm.$route.name === "home" },
                 attrs: { to: { name: "home" } }
               },
               [_vm._v("Очередь")]
@@ -33213,6 +33769,7 @@ var render = function() {
               "router-link",
               {
                 staticClass: "button u-full-width",
+                class: { "button-primary": _vm.$route.name === "watched" },
                 attrs: { to: { name: "watched" } }
               },
               [_vm._v("Просмотренные")]
@@ -33221,22 +33778,22 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "two columns" }, [
-          _c(
-            "strong",
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "button button-primary u-full-width menu__add",
-                  attrs: { to: { name: "new" } }
-                },
-                [_vm._v("+")]
-              )
-            ],
-            1
-          )
-        ])
+        _c(
+          "div",
+          { staticClass: "two columns" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "button u-full-width menu__add",
+                class: { "button-primary": _vm.$route.name === "new" },
+                attrs: { to: { name: "new" }, title: "Добавить" }
+              },
+              [_vm._v("+")]
+            )
+          ],
+          1
+        )
       ]),
       _vm._v(" "),
       _c("router-view")
@@ -33291,7 +33848,7 @@ if (false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-40929e2c\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Queue.vue":
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-4736e615\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/mixins/ExistsList.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -33312,7 +33869,9 @@ var render = function() {
       _vm._v(" "),
       _vm._l(_vm.items, function(item) {
         return _c("movie", { key: item.id, attrs: { item: item } })
-      })
+      }),
+      _vm._v(" "),
+      _c("clip-loader", { attrs: { size: "30px", loading: _vm.searching } })
     ],
     2
   )
@@ -33323,7 +33882,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-40929e2c", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-4736e615", module.exports)
   }
 }
 
@@ -33383,7 +33942,11 @@ var render = function() {
           _c("div", { staticClass: "two columns movie__image" }, [
             _c("img", {
               staticClass: "u-max-full-width",
-              attrs: { src: _vm.data.image, alt: _vm.data.name }
+              attrs: {
+                src: _vm.data.image,
+                alt: _vm.data.name,
+                title: _vm.data.name
+              }
             })
           ]),
           _vm._v(" "),
@@ -33666,44 +34229,6 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-8caa5ffc", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-dbeb2272\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Watched.vue":
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("search", {
-        attrs: { endpoint: _vm.endpoint },
-        on: {
-          loaded: function($event) {
-            _vm.items = $event
-          }
-        }
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.items, function(item) {
-        return _c("movie", { key: item.id, attrs: { item: item } })
-      })
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-dbeb2272", module.exports)
   }
 }
 
@@ -48953,7 +49478,7 @@ var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/comp
 /* script */
 var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],\"es2015\"],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-decorators-legacy\",\"transform-class-properties\"]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/Queue.vue")
 /* template */
-var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-40929e2c\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Queue.vue")
+var __vue_template__ = null
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49053,7 +49578,7 @@ var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/comp
 /* script */
 var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],\"es2015\"],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-decorators-legacy\",\"transform-class-properties\"]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/Watched.vue")
 /* template */
-var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-dbeb2272\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Watched.vue")
+var __vue_template__ = null
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49082,6 +49607,54 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-dbeb2272", Component.options)
   } else {
     hotAPI.reload("data-v-dbeb2272", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/mixins/ExistsList.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],\"es2015\"],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-decorators-legacy\",\"transform-class-properties\"]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/mixins/ExistsList.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-4736e615\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/mixins/ExistsList.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/mixins/ExistsList.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4736e615", Component.options)
+  } else {
+    hotAPI.reload("data-v-4736e615", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
