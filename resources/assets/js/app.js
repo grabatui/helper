@@ -11,6 +11,7 @@ import Main from './components/Main';
 import Queue from './components/Queue';
 import Watched from './components/Watched';
 import New from './components/New';
+import Movie from './components/Movie';
 
 const router = new VueRouter({
     mode: 'history',
@@ -29,6 +30,11 @@ const router = new VueRouter({
             path: '/new',
             name: 'new',
             component: New,
+        },
+        {
+            path: '/movie/:id',
+            name: 'detail',
+            component: Movie,
         },
     ],
 });

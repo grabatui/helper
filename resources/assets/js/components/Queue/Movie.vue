@@ -2,12 +2,23 @@
     <transition :name="transition || 'fade'">
         <div class="row movie" v-if="shown">
             <div class="two columns movie__image">
-                <img :src="data.image" :alt="data.name" :title="data.name" class="u-max-full-width" />
+                <router-link :to="{name: 'detail', params: {id: item.kp_id}}">
+                    <img
+                        src="https://st.kp.yandex.net/images/no-poster.gif"
+                        :data-src="data.image"
+                        :alt="data.name"
+                        :title="data.name"
+                        class="lazyload u-max-full-width"
+                        ref="image"
+                    />
+                </router-link>
             </div>
 
             <div class="ten columns movie__content">
                 <div class="movie__title">
-                    <h5>{{ title }}</h5>
+                    <router-link :to="{name: 'detail', params: {id: item.kp_id}}">
+                        <h5>{{ title }}</h5>
+                    </router-link>
 
                     <a v-if="data.kp_link" :href="data.kp_link" target="_blank">
                         <img src="/img/kp.png" alt="Найти на КиноПоиске" />
@@ -78,6 +89,7 @@
     import Component from 'vue-class-component';
     import StarRating from 'vue-star-rating';
     import axios from 'axios';
+    import LazyLoad from 'lazyload';
 
     @Component({
         props: {
@@ -141,12 +153,14 @@
 
         reload() {
             axios
-                .get('/api/movie/' + this.data.id)
+                .get('/api/movie/' + this.data.id + '/reload')
                 .then((result) => this.data = result.data.data);
         }
 
         mounted() {
             this.data = this.item;
+
+            new LazyLoad([this.$refs.image]);
         }
     }
 </script>
@@ -167,6 +181,6 @@
     }
 
     .fade-leave-active {
-        transition: all .6s ease;
+        transition: all .4s ease;
     }
 </style>

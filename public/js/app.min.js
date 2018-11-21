@@ -1764,6 +1764,100 @@ exports.default = Main;
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],\"es2015\"],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-decorators-legacy\",\"transform-class-properties\"]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/Movie.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _dec, _class; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var _vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _vueClassComponent = __webpack_require__("./node_modules/vue-class-component/dist/vue-class-component.common.js");
+
+var _vueClassComponent2 = _interopRequireDefault(_vueClassComponent);
+
+var _ClipLoader = __webpack_require__("./node_modules/vue-spinner/src/ClipLoader.vue");
+
+var _ClipLoader2 = _interopRequireDefault(_ClipLoader);
+
+var _axios = __webpack_require__("./node_modules/axios/index.js");
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var New = (_dec = (0, _vueClassComponent2.default)({
+    components: { ClipLoader: _ClipLoader2.default }
+}), _dec(_class = function (_Vue) {
+    _inherits(New, _Vue);
+
+    function New() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, New);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = New.__proto__ || Object.getPrototypeOf(New)).call.apply(_ref, [this].concat(args))), _this), _this.id = null, _this.data = null, _this.shown = false, _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    _createClass(New, [{
+        key: 'mounted',
+        value: function mounted() {
+            var _this2 = this;
+
+            this.id = this.$route.params.hasOwnProperty('id') ? this.$route.params.id : null;
+
+            if (!this.id) {
+                this.shown = true;
+                return;
+            }
+
+            _axios2.default.get('/api/movie/' + this.id).then(function (result) {
+                _this2.shown = true;
+                _this2.data = result.data;
+            });
+        }
+    }]);
+
+    return New;
+}(_vue2.default)) || _class);
+exports.default = New;
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],\"es2015\"],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-decorators-legacy\",\"transform-class-properties\"]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/New.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1974,6 +2068,17 @@ var _dec, _class; //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var _vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 
@@ -1990,6 +2095,10 @@ var _vueStarRating2 = _interopRequireDefault(_vueStarRating);
 var _axios = __webpack_require__("./node_modules/axios/index.js");
 
 var _axios2 = _interopRequireDefault(_axios);
+
+var _lazyload = __webpack_require__("./node_modules/lazyload/lazyload.js");
+
+var _lazyload2 = _interopRequireDefault(_lazyload);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2067,7 +2176,7 @@ var Main = (_dec = (0, _vueClassComponent2.default)({
         value: function reload() {
             var _this4 = this;
 
-            _axios2.default.get('/api/movie/' + this.data.id).then(function (result) {
+            _axios2.default.get('/api/movie/' + this.data.id + '/reload').then(function (result) {
                 return _this4.data = result.data.data;
             });
         }
@@ -2075,6 +2184,8 @@ var Main = (_dec = (0, _vueClassComponent2.default)({
         key: 'mounted',
         value: function mounted() {
             this.data = this.item;
+
+            new _lazyload2.default([this.$refs.image]);
         }
     }, {
         key: 'title',
@@ -2367,6 +2478,10 @@ var Search = (_dec = (0, _vueClassComponent2.default)({
         key: 'search',
         value: function search() {
             var _this2 = this;
+
+            if (!this.query) {
+                return;
+            }
 
             this.$emit('loaded', {});
 
@@ -4812,7 +4927,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.fade-enter-active {\n    -webkit-transition: all .3s ease;\n    transition: all .3s ease;\n}\n.fade-enter {\n    -webkit-transform: translateX(10px);\n            transform: translateX(10px);\n    opacity: 0;\n}\n.fade-leave-to {\n    -webkit-transform: translate3d(100%, 0, 0);\n            transform: translate3d(100%, 0, 0);\n    opacity: 0;\n}\n.fade-leave-active {\n    -webkit-transition: all .6s ease;\n    transition: all .6s ease;\n}\n", ""]);
+exports.push([module.i, "\n.fade-enter-active {\n    -webkit-transition: all .3s ease;\n    transition: all .3s ease;\n}\n.fade-enter {\n    -webkit-transform: translateX(10px);\n            transform: translateX(10px);\n    opacity: 0;\n}\n.fade-leave-to {\n    -webkit-transform: translate3d(100%, 0, 0);\n            transform: translate3d(100%, 0, 0);\n    opacity: 0;\n}\n.fade-leave-active {\n    -webkit-transition: all .4s ease;\n    transition: all .4s ease;\n}\n", ""]);
 
 // exports
 
@@ -15299,6 +15414,187 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
+
+/***/ }),
+
+/***/ "./node_modules/lazyload/lazyload.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {/*!
+ * Lazy Load - JavaScript plugin for lazy loading images
+ *
+ * Copyright (c) 2007-2017 Mika Tuupola
+ *
+ * Licensed under the MIT license:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ * Project home:
+ *   https://appelsiini.net/projects/lazyload
+ *
+ * Version: 2.0.0-beta.2
+ *
+ */
+
+(function (root, factory) {
+    if (true) {
+        module.exports = factory(root);
+    } else if (typeof define === "function" && define.amd) {
+        define([], factory(root));
+    } else {
+        root.LazyLoad = factory(root);
+    }
+}) (typeof global !== "undefined" ? global : this.window || this.global, function (root) {
+
+    "use strict";
+
+    const defaults = {
+        src: "data-src",
+        srcset: "data-srcset",
+        selector: ".lazyload"
+    };
+
+    /**
+    * Merge two or more objects. Returns a new object.
+    * @private
+    * @param {Boolean}  deep     If true, do a deep (or recursive) merge [optional]
+    * @param {Object}   objects  The objects to merge together
+    * @returns {Object}          Merged values of defaults and options
+    */
+    const extend = function ()  {
+
+        let extended = {};
+        let deep = false;
+        let i = 0;
+        let length = arguments.length;
+
+        /* Check if a deep merge */
+        if (Object.prototype.toString.call(arguments[0]) === "[object Boolean]") {
+            deep = arguments[0];
+            i++;
+        }
+
+        /* Merge the object into the extended object */
+        let merge = function (obj) {
+            for (let prop in obj) {
+                if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+                    /* If deep merge and property is an object, merge properties */
+                    if (deep && Object.prototype.toString.call(obj[prop]) === "[object Object]") {
+                        extended[prop] = extend(true, extended[prop], obj[prop]);
+                    } else {
+                        extended[prop] = obj[prop];
+                    }
+                }
+            }
+        };
+
+        /* Loop through each object and conduct a merge */
+        for (; i < length; i++) {
+            let obj = arguments[i];
+            merge(obj);
+        }
+
+        return extended;
+    };
+
+    function LazyLoad(images, options) {
+        this.settings = extend(defaults, options || {});
+        this.images = images || document.querySelectorAll(this.settings.selector);
+        this.observer = null;
+        this.init();
+    }
+
+    LazyLoad.prototype = {
+        init: function() {
+
+            /* Without observers load everything and bail out early. */
+            if (!root.IntersectionObserver) {
+                this.loadImages();
+                return;
+            }
+
+            let self = this;
+            let observerConfig = {
+                root: null,
+                rootMargin: "0px",
+                threshold: [0]
+            };
+
+            this.observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function (entry) {
+                    if (entry.intersectionRatio > 0) {
+                        self.observer.unobserve(entry.target);
+                        let src = entry.target.getAttribute(self.settings.src);
+                        let srcset = entry.target.getAttribute(self.settings.srcset);
+                        if ("img" === entry.target.tagName.toLowerCase()) {
+                            if (src) {
+                                entry.target.src = src;
+                            }
+                            if (srcset) {
+                                entry.target.srcset = srcset;
+                            }
+                        } else {
+                            entry.target.style.backgroundImage = "url(" + src + ")";
+                        }
+                    }
+                });
+            }, observerConfig);
+
+            this.images.forEach(function (image) {
+                self.observer.observe(image);
+            });
+        },
+
+        loadAndDestroy: function () {
+            if (!this.settings) { return; }
+            this.loadImages();
+            this.destroy();
+        },
+
+        loadImages: function () {
+            if (!this.settings) { return; }
+
+            let self = this;
+            this.images.forEach(function (image) {
+                let src = image.getAttribute(self.settings.src);
+                let srcset = image.getAttribute(self.settings.srcset);
+                if ("img" === image.tagName.toLowerCase()) {
+                    if (src) {
+                        image.src = src;
+                    }
+                    if (srcset) {
+                        image.srcset = srcset;
+                    }
+                } else {
+                    image.style.backgroundImage = "url(" + src + ")";
+                }
+            });
+        },
+
+        destroy: function () {
+            if (!this.settings) { return; }
+            this.observer.disconnect();
+            this.settings = null;
+        }
+    };
+
+    root.lazyload = function(images, options) {
+        return new LazyLoad(images, options);
+    };
+
+    if (root.jQuery) {
+        const $ = root.jQuery;
+        $.fn.lazyload = function (options) {
+            options = options || {};
+            options.attribute = options.attribute || "data-src";
+            new LazyLoad($.makeArray(this), options);
+            return this;
+        };
+    }
+
+    return LazyLoad;
+});
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -33939,51 +34235,81 @@ var render = function() {
   return _c("transition", { attrs: { name: _vm.transition || "fade" } }, [
     _vm.shown
       ? _c("div", { staticClass: "row movie" }, [
-          _c("div", { staticClass: "two columns movie__image" }, [
-            _c("img", {
-              staticClass: "u-max-full-width",
-              attrs: {
-                src: _vm.data.image,
-                alt: _vm.data.name,
-                title: _vm.data.name
-              }
-            })
-          ]),
+          _c(
+            "div",
+            { staticClass: "two columns movie__image" },
+            [
+              _c(
+                "router-link",
+                {
+                  attrs: {
+                    to: { name: "detail", params: { id: _vm.item.kp_id } }
+                  }
+                },
+                [
+                  _c("img", {
+                    ref: "image",
+                    staticClass: "lazyload u-max-full-width",
+                    attrs: {
+                      src: "https://st.kp.yandex.net/images/no-poster.gif",
+                      "data-src": _vm.data.image,
+                      alt: _vm.data.name,
+                      title: _vm.data.name
+                    }
+                  })
+                ]
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "ten columns movie__content" }, [
-            _c("div", { staticClass: "movie__title" }, [
-              _c("h5", [_vm._v(_vm._s(_vm.title))]),
-              _vm._v(" "),
-              _vm.data.kp_link
-                ? _c(
-                    "a",
-                    { attrs: { href: _vm.data.kp_link, target: "_blank" } },
-                    [
-                      _c("img", {
-                        attrs: {
-                          src: "/img/kp.png",
-                          alt: "Найти на КиноПоиске"
-                        }
-                      })
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.data.rt_link
-                ? _c(
-                    "a",
-                    { attrs: { href: _vm.data.rt_link, target: "_blank" } },
-                    [
-                      _c("img", {
-                        attrs: {
-                          src: "/img/rt.png",
-                          alt: "Найти на RuTracker'е"
-                        }
-                      })
-                    ]
-                  )
-                : _vm._e()
-            ]),
+            _c(
+              "div",
+              { staticClass: "movie__title" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    attrs: {
+                      to: { name: "detail", params: { id: _vm.item.kp_id } }
+                    }
+                  },
+                  [_c("h5", [_vm._v(_vm._s(_vm.title))])]
+                ),
+                _vm._v(" "),
+                _vm.data.kp_link
+                  ? _c(
+                      "a",
+                      { attrs: { href: _vm.data.kp_link, target: "_blank" } },
+                      [
+                        _c("img", {
+                          attrs: {
+                            src: "/img/kp.png",
+                            alt: "Найти на КиноПоиске"
+                          }
+                        })
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.data.rt_link
+                  ? _c(
+                      "a",
+                      { attrs: { href: _vm.data.rt_link, target: "_blank" } },
+                      [
+                        _c("img", {
+                          attrs: {
+                            src: "/img/rt.png",
+                            alt: "Найти на RuTracker'е"
+                          }
+                        })
+                      ]
+                    )
+                  : _vm._e()
+              ],
+              1
+            ),
             _vm._v(" "),
             _vm.data.original_name
               ? _c("p", { staticClass: "movie__subtitle" }, [
@@ -34229,6 +34555,57 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-8caa5ffc", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-e3a4a0ee\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Movie.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "detail" },
+    [
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.shown,
+              expression: "shown"
+            }
+          ],
+          staticClass: "detail__content"
+        },
+        [
+          !_vm.id || _vm.data == null
+            ? _c("p", [_vm._v("Такого фильма не найдено :C")])
+            : _c("div", [_vm._v("Yes!")])
+        ]
+      ),
+      _vm._v(" "),
+      _c("clip-loader", {
+        staticClass: "detail__loader",
+        attrs: { loading: !_vm.shown }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e3a4a0ee", module.exports)
   }
 }
 
@@ -49275,6 +49652,10 @@ var _New = __webpack_require__("./resources/assets/js/components/New.vue");
 
 var _New2 = _interopRequireDefault(_New);
 
+var _Movie = __webpack_require__("./resources/assets/js/components/Movie.vue");
+
+var _Movie2 = _interopRequireDefault(_Movie);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 __webpack_require__("./resources/assets/js/bootstrap.js");
@@ -49296,6 +49677,10 @@ var router = new _vueRouter2.default({
         path: '/new',
         name: 'new',
         component: _New2.default
+    }, {
+        path: '/movie/:id',
+        name: 'detail',
+        component: _Movie2.default
     }]
 });
 
@@ -49407,6 +49792,54 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-2e13bc20", Component.options)
   } else {
     hotAPI.reload("data-v-2e13bc20", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Movie.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}],\"es2015\"],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}],\"transform-decorators-legacy\",\"transform-class-properties\"]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/Movie.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-e3a4a0ee\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Movie.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Movie.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e3a4a0ee", Component.options)
+  } else {
+    hotAPI.reload("data-v-e3a4a0ee", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

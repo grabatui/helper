@@ -41,7 +41,7 @@ class Movie extends Controller
         $limit = $request->get('limit', 10);
 
         if (empty($query)) {
-            return MovieCollection::make();
+            return MovieCollection::make(collect());
         }
 
         /** @var Client $parser */
@@ -50,18 +50,26 @@ class Movie extends Controller
 
         if ($result instanceof Collection) {
             $result = $result->slice(0, $limit);
+
+            if ($result->count() > 0) {
+                $result = $this->convertSearchToMovieCollection($result);
+            }
         }
 
-        if ($result->count() > 0) {
-            $result = $this->convertSearchToMovieCollection($result);
-        }
-
-        return MovieCollection::make($result);
+        return MovieCollection::make(($result) ? $result : collect());
     }
 
-    public function detail(MovieEntity $movie)
+    public function reload(MovieEntity $movie)
     {
         return MovieResource::make($movie);
+    }
+
+    public function detail($id)
+    {
+        /** @var Client $parser */
+        $parser = app('kinopoisk.parser');
+
+        return new JsonResponse($parser->getFilmApi()->details($id));
     }
 
     public function watch(MovieEntity $movie, Request $request)

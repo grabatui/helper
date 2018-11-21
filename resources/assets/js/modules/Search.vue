@@ -37,6 +37,10 @@
         query = '';
 
         search() {
+            if (!this.query) {
+                return;
+            }
+
             this.$emit('loaded', {});
 
             this.inProcess = true;
