@@ -6,14 +6,17 @@ use App\Entities\Movie as MovieEntity;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Movie as MovieResource;
 use App\Http\Resources\MovieCollection;
+use App\ThirdParty\Kinopoisk\Client;
+use App\ThirdParty\Kinopoisk\Models\Creator;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Siqwell\Kinopoisk\Client;
+use Siqwell\Kinopoisk\Models\Country;
 use Siqwell\Kinopoisk\Models\Film;
+use Siqwell\Kinopoisk\Models\Genre;
 
 class Movie extends Controller
 {
@@ -69,7 +72,49 @@ class Movie extends Controller
         /** @var Client $parser */
         $parser = app('kinopoisk.parser');
 
-        return new JsonResponse($parser->getFilmApi()->details($id));
+        $film = $parser->getFilmApi()->details($id);
+
+        if (!$film) {
+            return new JsonResponse([]);
+        }
+
+        // Жанры
+        if (!empty($film->getAttribute('genres'))) {
+            $film->setAttribute('genres', collect($film->getAttribute('genres'))->transform(function (Genre $genre) {
+                return $genre->toArray();
+            })->toArray());
+        }
+
+        // Страны
+        if (!empty($film->getAttribute('countries'))) {
+            $film->setAttribute('countries', collect($film->getAttribute('countries'))->transform(function (Country $genre) {
+                return $genre->toArray();
+            })->toArray());
+        }
+
+        // Создатели
+        if (!empty($film->getAttribute('creators'))) {
+            $creators = collect();
+            foreach ($film->getAttribute('creators') as $type => $typeCreators) {
+                $creators->offsetSet($type, [
+                    'type' => array_get(Creator::ALIASES, $type),
+                    'names' => collect($typeCreators)->transform(function (Creator $creator) {
+                        return $creator->getAttribute('name');
+                    })->toArray(),
+                ]);
+            }
+
+            $film->setAttribute('creators', $creators->toArray());
+        }
+
+        $film->setAttribute(
+            'premiere',
+            ($film->getAttribute('premiere')) ?
+                Carbon::createFromFormat('Y-m-d', $film->getAttribute('premiere'))->format('d.m.Y') :
+                null
+        );
+
+        return new JsonResponse($film);
     }
 
     public function watch(MovieEntity $movie, Request $request)

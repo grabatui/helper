@@ -2,6 +2,7 @@
 
 namespace App\ThirdParty\Kinopoisk\Mappers;
 
+use App\ThirdParty\Kinopoisk\Models\Creator;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Str;
@@ -53,7 +54,7 @@ class FilmDetails extends Mapper
             'premiere' => $this->parsePremiere(),
             'age_limit' => $this->parseAgeLimit(),
             'mpaa' => $this->parseMpaaRating(),
-            'company' => $this->parseCompany(),
+            'creators' => $this->parseCreators(),
         ]);
     }
 
@@ -65,6 +66,8 @@ class FilmDetails extends Mapper
         try {
             if ($canonical = $this->crawler->filterXPath("//link[@rel='canonical']/@href")->text()) {
                 if (preg_match('#\/film\/([0-9]+)\/$#', $canonical, $match)) {
+                    return intval($match[1]);
+                } elseif (preg_match('#\/film\/.+?\-([0-9]+)\/$#', $canonical, $match)) {
                     return intval($match[1]);
                 }
             }
@@ -252,18 +255,30 @@ class FilmDetails extends Mapper
     }
 
     /**
-     * @return null|string
+     * @return null|Creator[]
      */
-    private function parseCompany()
+    private function parseCreators()
     {
         try {
-            if ($container = $this->crawler->filterXPath('//*/td[normalize-space(text())="премьера (РФ)"]/parent::tr/td[last()]')) {
-                $id = $container->filterXPath('//*/a[contains(@href, "company")]/@href')->text();
+            $creators = [];
+            foreach (Creator::ALIASES as $type => $alias) {
+                $xPath = sprintf('//*/td[normalize-space(text())="%s"]/parent::tr/td[last()]/a', $alias);
 
-                if (Str::contains($id, 'company')) {
-                    return (int)collect(explode('/', trim($id, '/')))->last();
-                }
+                $result = [];
+                $this->crawler
+                    ->filterXPath($xPath)
+                    ->each(function (Crawler $node) use (&$result) {
+                        if ($node->text() === '...') {
+                            return;
+                        }
+
+                        $result[] = new Creator(['name' => $node->text()]);
+                    });
+
+                $creators[$type] = $result;
             }
+
+            return $creators;
         } catch (Exception $exception) {}
 
         return null;

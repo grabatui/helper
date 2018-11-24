@@ -1789,6 +1789,25 @@ var _dec, _class; //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var _vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 
@@ -1849,6 +1868,39 @@ var New = (_dec = (0, _vueClassComponent2.default)({
                 _this2.shown = true;
                 _this2.data = result.data;
             });
+        }
+    }, {
+        key: 'countries',
+        get: function get() {
+            var result = [];
+            if (this.data.hasOwnProperty('countries')) {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = this.data.countries[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var country = _step.value;
+
+                        result.push(country.name);
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+
+            return result.join(', ');
         }
     }]);
 
@@ -34587,7 +34639,32 @@ var render = function() {
         [
           !_vm.id || _vm.data == null
             ? _c("p", [_vm._v("Такого фильма не найдено :C")])
-            : _c("div", [_vm._v("Yes!")])
+            : _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "three columns" }, [
+                  _c("img", {
+                    staticClass: "u-max-full-width",
+                    attrs: { src: _vm.data.poster, alt: _vm.data.title }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "nine columns" }, [
+                  _c("h1", [_vm._v(_vm._s(_vm.data.title))]),
+                  _vm._v(" "),
+                  _c("table", { staticClass: "u-full-width" }, [
+                    _c("tr", [
+                      _c("td", { staticClass: "name" }, [_vm._v("Премьера")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.data.premiere))])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", { staticClass: "name" }, [_vm._v("Страна")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.countries))])
+                    ])
+                  ])
+                ])
+              ])
         ]
       ),
       _vm._v(" "),
