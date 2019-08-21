@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\ThirdParty\Kinopoisk\Client;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,9 +27,5 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment() !== 'production') {
             $this->app->register(IdeHelperServiceProvider::class);
         }
-
-        $this->app->singleton('kinopoisk.parser', function () {
-            return new Client();
-        });
     }
 }

@@ -1,40 +1,33 @@
-let mix = require('laravel-mix');
+const mix = require(`laravel-mix`);
+const {sync: glob} = require(`glob`);
 
 const config = {
     sass: {
-        from: 'resources/assets/sass/',
-        to: 'public/css/',
-        items: [
-            'app',
-            'skeleton',
-        ],
+        from: `resources/assets/sass/`,
+        to: `public/css/`,
     },
     js: {
-        from: 'resources/assets/js/',
-        to: 'public/js/',
-        items: [
-            'app',
-        ],
+        from: `resources/assets/js/`,
+        to: `public/js/`,
     },
     files: {
-        from: 'resources/assets/',
-        to: 'public/',
+        from: `resources/assets/`,
+        to: `public/`,
         items: [
-            'img',
+            `img`,
         ],
     },
 };
 
-config.sass.items.forEach((file) => mix
-    .sass(config.sass.from + file + '.scss', config.sass.to)
-    .minify(config.sass.to + file + '.css')
-    .version()
-);
+glob(config.sass.from + `[^_]*.scss`).forEach((style) => {
+    const dest = style.replace(config.sass.from, ``).replace(`.scss`, `.css`);
 
-config.js.items.forEach((file) => mix
-    .js(config.js.from + file + '.js', config.js.to)
-    .copy(config.js.to + file + '.js', config.js.to + file + '.min.js')
-    .version()
-);
+    mix.sass(style, config.sass.to + dest, {outputStyle: 'compressed'});
 
-config.files.items.forEach((file) => mix.copyDirectory(config.files.from + file, config.files.to + file))
+});
+
+glob(config.js.from + `*.js`).forEach((script) => {
+    mix.react(script, config.js.to);
+});
+
+config.files.items.forEach((file) => mix.copyDirectory(config.files.from + file, config.files.to + file));

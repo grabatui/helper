@@ -13,18 +13,12 @@
 
     <title>Grabatui's helper</title>
 
-    <!-- Fonts -->
-    <link href="//fonts.googleapis.com/css?family=Montserrat:400,300,600" rel="stylesheet" type="text/css">
-
-    <link rel="stylesheet" href="{{ mix('/css/skeleton.min.css') }}" />
-    <link rel="stylesheet" href="{{ mix('/css/app.min.css') }}" />
+    <link rel="stylesheet" href="{{ mix('/css/app.css') }}" />
 </head>
 
 <body>
-    <div id="app" class="container">
-        @yield('content')
-    </div>
+    @yield('content')
 
-    <script type="application/javascript" src="{{ mix('/js/app.min.js') }}"></script>
+    @stack('js')
 </body>
 </html>
