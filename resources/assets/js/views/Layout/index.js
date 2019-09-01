@@ -14,13 +14,15 @@ class LayoutComponent extends React.Component {
 
     render() {
         return (
-            <section className="section">
-                <div className="container">
+            <React.Fragment>
+                <main>
                     <Header />
+
                     {this.props.children}
-                    <Footer />
-                </div>
-            </section>
+                </main>
+
+                <Footer />
+            </React.Fragment>
         );
     }
 }

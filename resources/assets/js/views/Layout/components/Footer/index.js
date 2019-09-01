@@ -8,8 +8,14 @@ class FooterComponent extends React.Component {
     }
 
     render() {
+        // TODO: Global store for variables (like email bottom)
         return (
-            <footer>This is footer</footer>
+            <footer className="footer has-background-light">
+                <div className="content has-text-centered">
+                    <p>This site was created by Grabatui for fun</p>
+                    <p>You can call me by <a href="mailto:bitolyan@ya.ru" target="_blank">email</a></p>
+                </div>
+            </footer>
         );
     }
 }

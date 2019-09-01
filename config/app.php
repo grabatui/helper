@@ -169,7 +169,7 @@ return [
          */
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Siqwell\Kinopoisk\KinopoiskServiceProvider::class,
+        Tmdb\Laravel\TmdbServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -230,7 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'Kinopoisk' => \Siqwell\Kinopoisk\Facades\KinopoiskParser::class,
+        'Tmdb' => Tmdb\Laravel\Facades\Tmdb::class,
 
     ],
 
