@@ -45,13 +45,10 @@ class LoginComponent extends React.Component {
 
                     <hr/>
 
-                    {this.state.signUpOpened ?
-                        <RegistrationComponent />
-                        :
-                        <h2 className="title is-4 has-text-centered">
-                            <a href="#" className="has-text-info" onClick={this.onSignUpClick}>...or sign up</a>
-                        </h2>
-                    }
+                    <RegistrationComponent
+                        isOpened={this.state.signUpOpened}
+                        onOpenClick={this.onSignUpClick}
+                    />
                 </div>
             </ModalComponent>
         );

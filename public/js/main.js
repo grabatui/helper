@@ -36079,7 +36079,7 @@ function (_React$Component) {
   _createClass(RegistrationComponent, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return this.props.isOpened ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         action: "",
         method: "POST"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -36136,13 +36136,23 @@ function (_React$Component) {
         className: "control"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "button is-primary"
-      }, "Register")))));
+      }, "Register")))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "title is-4 has-text-centered"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "has-text-info",
+        onClick: this.props.onOpenClick
+      }, "...or sign up"));
     }
   }]);
 
   return RegistrationComponent;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
+RegistrationComponent.propTypes = {
+  isOpened: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired,
+  onOpenClick: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+};
 /* harmony default export */ __webpack_exports__["default"] = (RegistrationComponent);
 
 /***/ }),
@@ -36242,13 +36252,10 @@ function (_React$Component) {
         onRequestClose: this.onModalClosed
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "box"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Authorization__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), this.state.signUpOpened ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Registration__WEBPACK_IMPORTED_MODULE_3__["default"], null) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "title is-4 has-text-centered"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#",
-        className: "has-text-info",
-        onClick: this.onSignUpClick
-      }, "...or sign up"))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Authorization__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Registration__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        isOpened: this.state.signUpOpened,
+        onOpenClick: this.onSignUpClick
+      })));
     }
   }]);
 
