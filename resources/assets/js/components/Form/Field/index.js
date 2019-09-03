@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Field} from "formik";
 
 class FieldComponent extends React.Component {
     constructor(props) {
@@ -42,7 +41,7 @@ class FieldComponent extends React.Component {
     }
 
     render() {
-        const {id, label, type, icon, ...additional} = this.props;
+        const {id, label, type, icon, field, ...additional} = this.props;
         const classes = this.state.classes;
 
         return (
@@ -53,10 +52,11 @@ class FieldComponent extends React.Component {
                 >{label}</label>
 
                 <div className={classes.fieldWrapper}>
-                    <Field
+                    <input
+                        id={id}
                         className={classes.input}
                         type={type}
-                        id={id}
+                        {...field}
                         {...additional}
                     />
 
@@ -73,6 +73,7 @@ class FieldComponent extends React.Component {
 
 FieldComponent.propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    field: PropTypes.object,
     label: PropTypes.string,
     type: PropTypes.string,
     classes: PropTypes.objectOf(PropTypes.object),
@@ -83,7 +84,6 @@ FieldComponent.propTypes = {
 };
 
 FieldComponent.defaultProps = {
-    input: `input`,
     type: `text`,
 };
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Request;
+use Illuminate\Http\Request;
 
 class User extends Controller
 {
