@@ -28,6 +28,7 @@
     "@fortawesome/fontawesome-free": "^5.10.1",
     "babel-preset-react-app": "^9.0.1",
     "bulma": "^0.7.5",
+    "formik": "^1.5.8",
     "glob": "^7.1.4",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
