@@ -6,7 +6,13 @@ import parseResponse from "./parseResponse";
 const request = async ({url, parameters, method = GET, data = null, headers = {}}) => {
     const options = makeOptions(headers, method, data, parameters);
 
-    const response = await axios({method, url, ...options});
+    const response = await axios({
+        method,
+        url,
+        ...options,
+    }).catch(async (error) => {
+        return await parseResponse(error.response);
+    });
 
     return await parseResponse(response);
 };

@@ -40,8 +40,24 @@ class FieldComponent extends React.Component {
         });
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        let inputClass = `input`;
+
+        if (this.props.error) {
+            inputClass += ` is-danger`;
+        }
+
+        if (prevState.classes.input !== inputClass) {
+            this.setState((state) => {
+                state.classes.input = inputClass;
+
+                return state;
+            });
+        }
+    }
+
     render() {
-        const {id, label, type, icon, field, ...additional} = this.props;
+        const {id, label, type, icon, field, error, ...additional} = this.props;
         const classes = this.state.classes;
 
         return (
@@ -66,6 +82,10 @@ class FieldComponent extends React.Component {
                         </span>
                     )}
                 </div>
+
+                {error && (
+                    <p className="help is-danger">{error}</p>
+                )}
             </div>
         );
     }
@@ -81,6 +101,7 @@ FieldComponent.propTypes = {
         position: PropTypes.string,
         code: PropTypes.string,
     }),
+    error: PropTypes.string,
 };
 
 FieldComponent.defaultProps = {

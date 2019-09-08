@@ -8,11 +8,12 @@ Route::group(
     function () {
         Route::group(
             [
-                'prefix' => 'user',
+                'prefix' => 'auth',
+                'namespace' => 'Auth',
             ],
             function () {
-                Route::post('/auth', 'User@auth')->name('auth');
-                Route::post('/register', 'User@register')->name('register');
+                Route::post('/login', 'LoginController@login')->name('auth');
+                Route::post('/register', 'RegisterController@register')->name('register');
             }
         );
     }

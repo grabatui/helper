@@ -33,7 +33,7 @@ class RegistrationComponent extends React.Component {
                     <label className="label" htmlFor="register-repeat-password">Repeat Password</label>
 
                     <div className="control has-icons-left">
-                        <input className="input" type="password" id="register-repeat-password" placeholder="******"/>
+                        <input className="input" type="password" id="register-repeat-password" name="password_confirmation " placeholder="******"/>
 
                         <span className="icon is-small is-left">
                             <i className="fas fa-lock"></i>

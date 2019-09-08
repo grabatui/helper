@@ -9,14 +9,14 @@ const parseResponse = async (response) => {
         throw new TooManyRequestsError(response);
     }
 
-    const text = await response.text();
+    const data = await response.data;
 
     let json;
 
     try {
-        json = JSON.parse(text);
+        json = (typeof data === `object`) ? data : JSON.parse(data);
     } catch (error) {
-        throw new DefaultError(`Не удалось разобрать ответ от сервера)}`);
+        throw new DefaultError(`Не удалось разобрать ответ от сервера`);
     }
 
     if (response.status === status.UNPROCESSABLE_ENTITY) {

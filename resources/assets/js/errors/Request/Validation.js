@@ -4,9 +4,9 @@ import DefaultError from "./Default";
 
 class ValidationError extends DefaultError {
     constructor(response) {
-        super(response.description);
+        super(response.message);
 
-        this.errors = response.value;
+        this.errors = response.errors;
         this.flatErrors = flatten(this.errors);
 
         this.fields = new Set(
