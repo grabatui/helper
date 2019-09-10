@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
 class BreadcrumbsComponent extends React.Component {
     render() {
@@ -8,8 +9,9 @@ class BreadcrumbsComponent extends React.Component {
                 <div className="container">
                     <nav className="breadcrumb has-bullet-separator" aria-label="breadcrumbs">
                         <ul>
-                            <li><a href="/">Main</a></li>
-                            <li className="is-active"><a href="#" aria-current="page">To watch</a></li>
+                            {this.props.items && this.props.items.map((item) => {
+                                return <li key={item.text}><a href={item.url}>{item.text}</a></li>
+                            })}
                         </ul>
                     </nav>
                 </div>
@@ -22,4 +24,8 @@ BreadcrumbsComponent.propTypes = {
     items: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default BreadcrumbsComponent;
+const mapStateToProps = (state) => {
+    return {items: state.breadcrumbs.items};
+};
+
+export default connect(mapStateToProps)(BreadcrumbsComponent);

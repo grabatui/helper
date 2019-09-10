@@ -1,52 +1,88 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Formik, Form, Field} from "formik";
+import {register} from "../../../../../domain/User";
 
-class RegistrationComponent extends React.Component {
+import CustomField from "../../../../../components/Form/Field";
+import FormComponent from "../../../../../components/Form";
+
+class RegistrationComponent extends FormComponent {
+    constructor(props) {
+        super(props);
+
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    onSubmit(values) {
+        register(values)
+            .then((result) => {
+                // TODO
+            })
+            .catch(this.processException);
+    }
+
     render() {
         return this.props.isOpened ? (
-            <form action="" method="POST">
-                <div className="field">
-                    <label className="label" htmlFor="register-email">Email</label>
+            <Formik
+                onSubmit={this.onSubmit}
+                render={() => (
+                    <Form>
+                        <Field
+                            component={CustomField}
 
-                    <div className="control has-icons-left">
-                        <input className="input" type="email" id="register-email" placeholder="51neo42@gmail.com"/>
+                            id="register-email"
+                            name="email"
+                            type="email"
+                            placeholder="51neo42@gmail.com"
+                            label="Email"
+                            icon={{
+                                code: `fas fa-envelope`,
+                                position: `left`,
+                                className: `is-small`,
+                            }}
+                            error={this.getError(`email`)}
+                        />
 
-                        <span className="icon is-small is-left">
-                            <i className="fas fa-envelope"></i>
-                        </span>
-                    </div>
-                </div>
+                        <Field
+                            component={CustomField}
 
-                <div className="field">
-                    <label className="label" htmlFor="register-password">Password</label>
+                            id="register-password"
+                            name="password"
+                            type="password"
+                            placeholder="******"
+                            label="Password"
+                            icon={{
+                                code: `fas fa-lock`,
+                                position: `left`,
+                                className: `is-small`,
+                            }}
+                            error={this.getError(`email`)}
+                        />
 
-                    <div className="control has-icons-left">
-                        <input className="input" type="password" id="register-password" placeholder="******"/>
+                        <Field
+                            component={CustomField}
 
-                        <span className="icon is-small is-left">
-                            <i className="fas fa-lock"></i>
-                        </span>
-                    </div>
-                </div>
+                            id="register-repeat-password"
+                            name="password_confirmation"
+                            type="password"
+                            placeholder="******"
+                            label="Password"
+                            icon={{
+                                code: `fas fa-lock`,
+                                position: `left`,
+                                className: `is-small`,
+                            }}
+                            error={this.getError(`email`)}
+                        />
 
-                <div className="field">
-                    <label className="label" htmlFor="register-repeat-password">Repeat Password</label>
-
-                    <div className="control has-icons-left">
-                        <input className="input" type="password" id="register-repeat-password" name="password_confirmation " placeholder="******"/>
-
-                        <span className="icon is-small is-left">
-                            <i className="fas fa-lock"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <div className="field is-grouped is-grouped-right">
-                    <div className="control">
-                        <button className="button is-primary">Register</button>
-                    </div>
-                </div>
-            </form>
+                        <div className="field is-grouped is-grouped-right">
+                            <div className="control">
+                                <button className="button is-primary" type="submit">Register</button>
+                            </div>
+                        </div>
+                    </Form>
+                )}
+            />
         ) : (
             <h2 className="title is-4 has-text-centered">
                 <a href="#" className="has-text-info" onClick={this.props.onOpenClick}>...or sign up</a>

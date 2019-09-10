@@ -3,18 +3,13 @@ import {Formik, Form, Field} from "formik";
 import {auth} from "../../../../../domain/User";
 
 import CustomField from "../../../../../components/Form/Field";
+import FormComponent from "../../../../../components/Form";
 
-class AuthorizationComponent extends React.Component {
+class AuthorizationComponent extends FormComponent {
     constructor(props) {
         super(props);
 
-        this.state = {
-            errors: {},
-        };
-
         this.onSubmit = this.onSubmit.bind(this);
-        this.getError = this.getError.bind(this);
-        this.processException = this.processException.bind(this);
     }
 
     onSubmit(values) {
@@ -23,21 +18,6 @@ class AuthorizationComponent extends React.Component {
                 // TODO
             })
             .catch(this.processException);
-    }
-
-    processException(exception) {
-        this.setState((state) => {
-            return {
-                ...state,
-                errors: exception.errors || {},
-            };
-        })
-    }
-
-    getError(code) {
-        return (this.state.errors && this.state.errors.hasOwnProperty(code)) ?
-            this.state.errors[code].join(`, `) :
-            '';
     }
 
     render() {

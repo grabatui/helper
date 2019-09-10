@@ -2,7 +2,7 @@ import React from "react";
 
 import SearchComponent from "./components/Search";
 import LoginComponent from "./components/Login";
-import BreadcrumbsContainer from "./containers/Breadcrumbs";
+import BreadcrumbsComponent from "./components/Breadcrumbs";
 
 class HeaderComponent extends React.Component {
     render() {
@@ -26,7 +26,7 @@ class HeaderComponent extends React.Component {
                     </div>
                 </div>
 
-                <BreadcrumbsContainer />
+                <BreadcrumbsComponent />
             </section>
         );
     }
