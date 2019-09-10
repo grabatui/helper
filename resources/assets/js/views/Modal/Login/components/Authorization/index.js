@@ -60,7 +60,7 @@ class AuthorizationComponent extends React.Component {
                                 icon={{
                                     code: `fas fa-envelope`,
                                     position: `left`,
-                                    class: `is-small`,
+                                    className: `is-small`,
                                 }}
                                 error={this.getError(`email`)}
                             />
@@ -76,7 +76,7 @@ class AuthorizationComponent extends React.Component {
                                 icon={{
                                     code: `fas fa-lock`,
                                     position: `left`,
-                                    class: `is-small`,
+                                    className: `is-small`,
                                 }}
                                 error={this.getError(`password`)}
                             />

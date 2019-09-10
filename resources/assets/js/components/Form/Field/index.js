@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import IconComponent from "../../Icon";
 
 class FieldComponent extends React.Component {
     constructor(props) {
@@ -27,11 +28,6 @@ class FieldComponent extends React.Component {
             const icon = this.props.icon;
 
             classes.fieldWrapper += ` has-icons-${icon.position}`;
-            classes.icon += ` is-${icon.position}`;
-
-            if (icon.class) {
-                classes.icon += ` ${icon.class}`;
-            }
 
             return {
                 ...state,
@@ -76,11 +72,7 @@ class FieldComponent extends React.Component {
                         {...additional}
                     />
 
-                    {icon && icon.code && (
-                        <span className={`icon ${classes.icon}`}>
-                            <i className={icon.code}></i>
-                        </span>
-                    )}
+                    {icon && icon.code && <IconComponent {...icon} />}
                 </div>
 
                 {error && (
