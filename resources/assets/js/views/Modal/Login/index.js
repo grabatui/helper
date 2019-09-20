@@ -40,7 +40,7 @@ class LoginComponent extends React.Component {
                 isOpen={this.props.isOpen}
                 onRequestClose={this.onModalClosed}
             >
-                <div className="box">
+                <div className="box auth-box">
                     <AuthorizationComponent />
 
                     <hr/>

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-class LoginController extends Controller
+class Login extends Controller
 {
     use AuthenticatesUsers {
         AuthenticatesUsers::login as parentLogin;

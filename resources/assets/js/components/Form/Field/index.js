@@ -53,7 +53,7 @@ class FieldComponent extends React.Component {
     }
 
     render() {
-        const {id, label, type, icon, field, error, ...additional} = this.props;
+        const {id, label, type, icon, field, errors, ...additional} = this.props;
         const classes = this.state.classes;
 
         return (
@@ -75,8 +75,12 @@ class FieldComponent extends React.Component {
                     {icon && icon.code && <IconComponent {...icon} />}
                 </div>
 
-                {error && (
-                    <p className="help is-danger">{error}</p>
+                {errors && (
+                    <p className="help is-danger">
+                        {errors.map((error) => {
+                            return <span>{error}</span>;
+                        })}
+                    </p>
                 )}
             </div>
         );
@@ -93,7 +97,7 @@ FieldComponent.propTypes = {
         position: PropTypes.string,
         code: PropTypes.string,
     }),
-    error: PropTypes.string,
+    errors: PropTypes.array,
 };
 
 FieldComponent.defaultProps = {

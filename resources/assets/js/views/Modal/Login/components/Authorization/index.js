@@ -42,7 +42,7 @@ class AuthorizationComponent extends FormComponent {
                                     position: `left`,
                                     className: `is-small`,
                                 }}
-                                error={this.getError(`email`)}
+                                errors={this.getError(`email`)}
                             />
 
                             <Field
@@ -58,7 +58,7 @@ class AuthorizationComponent extends FormComponent {
                                     position: `left`,
                                     className: `is-small`,
                                 }}
-                                error={this.getError(`password`)}
+                                errors={this.getError(`password`)}
                             />
 
                             <div className="field is-grouped is-grouped-right">

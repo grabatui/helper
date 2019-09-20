@@ -12,8 +12,8 @@ Route::group(
                 'namespace' => 'Auth',
             ],
             function () {
-                Route::post('/login', 'LoginController@login')->name('auth');
-                Route::post('/register', 'RegisterController@register')->name('register');
+                Route::post('/login', 'Login@login')->name('auth');
+                Route::post('/register', 'Register@register')->name('register');
             }
         );
     }

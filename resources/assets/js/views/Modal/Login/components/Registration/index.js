@@ -40,7 +40,7 @@ class RegistrationComponent extends FormComponent {
                                 position: `left`,
                                 className: `is-small`,
                             }}
-                            error={this.getError(`email`)}
+                            errors={this.getError(`email`)}
                         />
 
                         <Field
@@ -56,7 +56,7 @@ class RegistrationComponent extends FormComponent {
                                 position: `left`,
                                 className: `is-small`,
                             }}
-                            error={this.getError(`email`)}
+                            errors={this.getError(`password`)}
                         />
 
                         <Field
@@ -72,7 +72,6 @@ class RegistrationComponent extends FormComponent {
                                 position: `left`,
                                 className: `is-small`,
                             }}
-                            error={this.getError(`email`)}
                         />
 
                         <div className="field is-grouped is-grouped-right">

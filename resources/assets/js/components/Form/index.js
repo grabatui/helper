@@ -23,8 +23,8 @@ class FormComponent extends React.Component {
 
     getError(code) {
         return (this.state.errors && this.state.errors.hasOwnProperty(code)) ?
-            this.state.errors[code].join(`, `) :
-            '';
+            this.state.errors[code] :
+            [];
     }
 }
 
