@@ -1,6 +1,6 @@
 <?php
 
-use GuzzleHttp\RequestOptions;
+use App\Entities\User;
 
 return [
 
@@ -19,6 +19,9 @@ return [
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
+        'endpoint' => 'api.mailgun.net',
+
+        'guzzle' => ['verify' => false],
     ],
 
     'ses' => [
@@ -32,19 +35,9 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\User::class,
+        'model' => User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
-    ],
-
-    'kinopoisk' => [
-        'cache' => [],
-        'client' => [
-            RequestOptions::TIMEOUT => 30,
-            RequestOptions::ALLOW_REDIRECTS => true,
-            RequestOptions::PROXY => null,
-            RequestOptions::VERIFY => false,
-        ],
     ],
 
 ];
