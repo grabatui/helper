@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Listeners\User\SendNewUserEMail;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -13,11 +11,7 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $listen = [
-        Registered::class => [
-            SendNewUserEMail::class,
-        ],
-    ];
+    protected $listen = [];
 
     /**
      * Register any events for your application.

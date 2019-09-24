@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
+use App\Entities\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Notifications\UserRegistered;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\JsonResponse;
 
 class Register extends Controller
 {
-    use RegistersUsers {
-        RegistersUsers::register as parentRegister;
-    }
-
     public function register(RegisterRequest $request)
     {
-        return $this->parentRegister($request);
+        event(new Registered($user = User::create($request->all())));
+
+        $user->notify(new UserRegistered($user));
+
+        return new JsonResponse();
     }
 }
