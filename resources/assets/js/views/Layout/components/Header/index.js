@@ -20,8 +20,7 @@ class HeaderComponent extends React.Component {
 
                             <SearchComponent />
 
-                            {/*TODO: Correct loggedIn*/}
-                            <LoginComponent loggedIn={false} />
+                            <LoginComponent />
                         </div>
                     </div>
                 </div>

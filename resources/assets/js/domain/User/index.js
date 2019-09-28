@@ -1,5 +1,12 @@
 import request from "../../modules/Request";
-import {POST} from "../../modules/Request/httpMethods";
+import {GET, POST} from "../../modules/Request/httpMethods";
+
+export const get = async () => {
+    return await request({
+        url: `/api/user/get`,
+        method: GET,
+    });
+};
 
 export const auth = async (data) => {
     return await request({

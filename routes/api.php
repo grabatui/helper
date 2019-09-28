@@ -16,5 +16,11 @@ Route::group(
                 Route::post('/register', 'Register@register')->name('register');
             }
         );
+        Route::group(
+            ['prefix' => 'user'],
+            function () {
+                Route::get('/get', 'User@get')->name('get');
+            }
+        );
     }
 );

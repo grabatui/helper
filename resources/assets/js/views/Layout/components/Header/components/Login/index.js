@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 import LoginModalComponent from "../../../../../Modal/Login";
+import {get} from "../../../../../../domain/User";
 
 class LoginComponent extends React.Component {
     constructor(props) {
@@ -9,11 +9,24 @@ class LoginComponent extends React.Component {
         this.state = {
             loggedIn: false,
             modalIsOpen: false,
+            loaded: false,
         };
 
         this.toggleModal = this.toggleModal.bind(this);
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+    }
+
+    componentDidMount() {
+        get().then((result) => {
+            this.setState((state) => {
+                return {
+                    ...state,
+                    loggedIn: (result && result.value),
+                    loaded: true,
+                };
+            });
+        });
     }
 
     toggleModal(modalState) {
@@ -34,6 +47,10 @@ class LoginComponent extends React.Component {
     }
 
     render() {
+        if (!this.state.loaded) {
+            return ``;
+        }
+
         return (
             this.state.loggedIn ? (
                 <a className="button is-medium is-primary" title="Login" href="/cabinet">
@@ -60,9 +77,5 @@ class LoginComponent extends React.Component {
         );
     }
 }
-
-LoginComponent.propTypes = {
-    loggedIn: PropTypes.bool,
-};
 
 export default LoginComponent;
